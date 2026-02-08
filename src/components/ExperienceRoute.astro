@@ -1,0 +1,71 @@
+---
+import Card from "./Card.astro";
+const { experiences } = (await import("../data/data.json")).default;
+---
+
+<section id="experience" class="experience-section">
+    <div class="container">
+        <h2 class="section-title">
+            <span>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--accent)"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="margin-right: 10px; vertical-align: middle;"
+                    ><rect width="20" height="14" x="2" y="3" rx="2" ry="2"
+                    ></rect><line x1="8" y1="21" x2="16" y2="21"></line><line
+                        x1="12"
+                        y1="17"
+                        x2="12"
+                        y2="21"></line></svg
+                >
+                Experiencia:
+            </span>
+        </h2>
+
+        <div class="timeline">
+            {
+                experiences.map((exp: any) => (
+                    <Card
+                        date={exp.date}
+                        title={exp.title}
+                        subtitle={exp.subtitle}
+                        link={exp.link}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .experience-section {
+        padding: 6rem 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 5rem;
+        text-align: left;
+        color: var(--text);
+    }
+
+    .timeline {
+        position: relative;
+        border-left: 1px solid var(--primary);
+        padding-left: 0;
+        margin-left: 2rem;
+    }
+</style>

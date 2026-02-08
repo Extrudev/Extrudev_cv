@@ -1,0 +1,37 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import ExperienceRoute from "../components/ExperienceRoute.astro";
+import Footer from "../components/Footer.astro";
+
+const { personalInfo } = (await import("../data/data.json")).default;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content={`Portfolio de ${personalInfo.name} - ${personalInfo.role}`}
+		/>
+		<title>{personalInfo.name} | {personalInfo.role}</title>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Onest:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<Hero />
+			<ExperienceRoute />
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,123 @@
+---
+interface Props {
+    date: string;
+    title: string;
+    subtitle: string;
+    link?: string | null;
+}
+
+const { date, title, subtitle, link } = Astro.props;
+---
+
+<div class="card">
+    <div class="card-dot"></div>
+    <div class="card-content">
+        <div class="syntax-date">
+            <span class="syntax-bracket">[</span>
+            {date}
+            <span class="syntax-bracket">]</span>
+        </div>
+
+        <div class="syntax-function">
+            <span class="syntax-arrow">=&gt;</span>
+            <span class="syntax-bracket">(</span>
+            <span class="syntax-name">{title}</span>
+            <span class="syntax-bracket">)</span>
+        </div>
+
+        <div class="syntax-comment">
+            //** {subtitle} */
+        </div>
+
+        {
+            link && (
+                <div class="card-action">
+                    <a
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-premium"
+                    >
+                        Saber más
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M7 7l10 10M17 7v10H7" />
+                        </svg>
+                    </a>
+                </div>
+            )
+        }
+    </div>
+</div>
+
+<style>
+    .card {
+        position: relative;
+        padding-left: 3rem;
+        margin-bottom: 4rem;
+    }
+
+    .card-dot {
+        position: absolute;
+        left: -5px;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        background: var(--primary);
+        border-radius: 50%;
+        z-index: 2;
+    }
+
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .syntax-date {
+        font-size: 0.9rem;
+        color: #c678dd; /* Purple for date/keyword */
+    }
+
+    .syntax-function {
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    .syntax-name {
+        color: var(--logo);
+    }
+
+    .syntax-comment {
+        color: var(--secondary);
+        font-size: 0.95rem;
+        margin: 0.5rem 0;
+        line-height: 1.6;
+    }
+
+    .syntax-bracket {
+        color: #abb2bf;
+    }
+    .syntax-arrow {
+        color: var(--accent);
+    }
+
+    .card-action {
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .syntax-function {
+            font-size: 1.1rem;
+        }
+    }
+</style>

@@ -1,0 +1,70 @@
+{
+  "personalInfo": {
+    "name": "ExtruDev",
+    "role": "Desarrollador con 2 años de experiencia",
+    "location": "Marbella, Málaga",
+    "description": "Desarrollador web.",
+    "email": "info@extrudev.com",
+    "socials": {
+      "github": "https://github.com/Extrudev"
+    }
+  },
+  "experiences": [
+    {
+      "id": 8,
+      "date": "Febrero 2026",
+      "title": "web premium inmobiliaria",
+      "subtitle": "Web premium inmobiliaria con catalogo dinámico y animaciones, conectada y sincronizada con su propia API.",
+      "link": "https://www.grupoadosa.com"
+    },
+    {
+      "id": 7,
+      "date": "Enero 2025",
+      "title": "Curso FullStack",
+      "subtitle": "Siguiendo curso de FullStack. Desarrollando y colaborando en diferentes repositorios de Github.",
+      "link": "https://www.jscamp.dev/"
+    },
+    {
+      "id": 6,
+      "date": "Febrero 2024",
+      "title": "Landing Page para Grupo Musical",
+      "subtitle": "Landing page sencilla para grupo 'Among Us' para sus redes sociales y contratación.",
+      "link": "https://www.amongus.band"
+    },
+    {
+      "id": 5,
+      "date": "Noviembre 2023",
+      "title": "Especialización framework 'Astro'",
+      "subtitle": "Prácticas de desarrollo de diferentes aplicaciones dinámicas.",
+      "link": null
+    },
+    {
+      "id": 4,
+      "date": "Septiembre 2023",
+      "title": "JavaScript de 'Midudev'",
+      "subtitle": "Ejercicios de la web de aprendizaje de JavaScript del developer 'Midudev'.",
+      "link": "https://www.aprendejavascript.dev/"
+    },
+    {
+      "id": 3,
+      "date": "Agosto 2023",
+      "title": "Iniciación framework 'Astro'",
+      "subtitle": "Ejercicios del developer 'Midudev' elaboración de Landing pages varias.",
+      "link": null
+    },
+    {
+      "id": 2,
+      "date": "Junio 2023",
+      "title": "Curso CSS de 'HolaMundo'",
+      "subtitle": "Curso integral de CSS con sus últimas actualizaciones y tecnologías incluyendo ejercicios prácticos.",
+      "link": "https://youtu.be/wZniZEbPAzk?si=d9doPnbyFy3L5wbh"
+    },
+    {
+      "id": 1,
+      "date": "Marzo 2023",
+      "title": "Curso HTML5 de 'HolaMundo'",
+      "subtitle": "Curso integral de HTML5 con sus últimas actualizaciones y tecnologías incluyendo ejercicios prácticos.",
+      "link": "https://youtu.be/MJkdaVFHrto?si=Are2z6-9wVIAf8CH"
+    }
+  ]
+}

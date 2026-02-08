@@ -1,0 +1,79 @@
+:root {
+    color-scheme: light dark;
+    --header: #23272e;
+    --background: #1e2227;
+    --text: #fff;
+    --primary: #e5c07b;
+    --secondary: #89ca78;
+    --accent: #e2595a;
+    --logo: #77c8fd;
+    --i-background: #131313;
+    --i-background-hover: #1d1d1d;
+
+    --font-main: 'Fira Code', monospace;
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: var(--font-main);
+    background-color: var(--background);
+    color: var(--text);
+}
+
+body {
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-smooth);
+}
+
+ul {
+    list-style: none;
+}
+
+/* Premium Button Hovers */
+.btn-premium {
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    background: var(--i-background);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 400;
+    font-family: var(--font-main);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+}
+
+.btn-premium:hover {
+    background: var(--i-background-hover);
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+/* Typing Effect Keyframes */
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: var(--primary)
+    }
+}
