@@ -11,6 +11,13 @@
   },
   "experiences": [
     {
+      "id": 9,
+      "date": "Marzo 2026",
+      "title": "Landig page para Club de senderismo",
+      "subtitle": "Landig page premium con animacion customizada para club de senderismo ama dablam.",
+      "link": "/amadablam"
+    },
+    {
       "id": 8,
       "date": "Febrero 2026",
       "title": "web premium inmobiliaria",

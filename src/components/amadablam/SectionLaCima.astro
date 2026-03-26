@@ -1,0 +1,149 @@
+---
+// SectionLaCima.astro — Sección final / "La Cima"
+---
+
+<section id="summit" class="summit-section">
+  <div class="content-container summit-grid">
+    <div class="summit-text">
+      <div class="top-badge">¡Has llegado a la cima!</div>
+      <h2 class="section-title">La Cima</h2>
+      <p class="summit-quote">
+        «Las mejores vistas llegan tras la escalada más dura.»
+      </p>
+      <button class="btn-secondary">Únete al Club</button>
+    </div>
+    <div class="summit-contact">
+      <h3>Preguntas y consultas</h3>
+      <button class="btn-outline">MÁNDANOS UN MENSAJE</button>
+    </div>
+  </div>
+  <footer class="main-footer">
+    &copy; {new Date().getFullYear()} Club Alpino Ama Dablam. Elevando el potencial
+    humano.
+  </footer>
+</section>
+
+<style>
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 3rem;
+      text-align: left;
+    }
+  }
+
+  .summit-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .summit-grid {
+      gap: 3rem;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: start;
+    }
+  }
+
+  .summit-text {
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .summit-text {
+      text-align: left;
+    }
+  }
+
+  .top-badge {
+    display: inline-block;
+    background-color: #fff;
+    color: #000;
+    font-weight: 900;
+    padding: 0.25rem 1rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .summit-quote {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #d1d5db;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .summit-quote {
+      font-size: 1.5rem;
+    }
+  }
+
+  .btn-secondary {
+    padding: 1rem 2.5rem;
+    background-color: #fff;
+    color: #000;
+    font-weight: 900;
+    font-size: 1.125rem;
+    text-decoration: none;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--clr-main);
+  }
+
+  .summit-contact {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    padding: 2rem;
+    border-left: 4px solid var(--clr-main);
+  }
+
+  .summit-contact h3 {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn-outline {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    transition: all 0.3s;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .btn-outline:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .main-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--clr-main);
+    color: var(--clr-main);
+    font-size: 1rem;
+  }
+</style>

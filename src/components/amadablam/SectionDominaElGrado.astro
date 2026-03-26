@@ -1,0 +1,109 @@
+---
+// SectionDominaElGrado.astro — Sección de servicios / "Domina el Grado"
+---
+
+<section id="low" class="services-section">
+  <div class="content-container">
+    <h2 class="section-title">Domina el Grado</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Rutas guiadas</h3>
+        <p>
+          Expediciones dirigidas por expertos a los Pirineos, Alpes e
+          Himalayas.
+        </p>
+        <span class="card-link">VER RUTAS &rarr;</span>
+      </div>
+      <div class="service-card">
+        <h3>Cursos de escalada</h3>
+        <p>
+          Desde los fundamentos para principiantes hasta escalada en cabeza
+          y seguridad avanzada.
+        </p>
+        <span class="card-link">INSCRÍBETE &rarr;</span>
+      </div>
+      <div class="service-card">
+        <h3>Alquiler Pro</h3>
+        <p>
+          Arneses, pies de gato y material de seguridad de primera calidad
+          de las mejores marcas.
+        </p>
+        <span class="card-link">VER MATERIAL &rarr;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 3rem;
+      text-align: left;
+    }
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .service-card {
+    background-color: rgba(24, 24, 27, 0.8);
+    padding: 2rem;
+    border-left: 4px solid var(--clr-main);
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .service-card:hover {
+    background-color: var(--clr-main);
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+    transition: color 0.3s;
+  }
+
+  .service-card:hover h3 {
+    color: #000;
+  }
+
+  .service-card p {
+    color: #9ca3af;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+  }
+
+  .service-card:hover p {
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .card-link {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #fff;
+    transition: color 0.3s;
+  }
+
+  .service-card:hover .card-link {
+    color: #000;
+  }
+</style>

@@ -1,0 +1,166 @@
+---
+// SectionInstalaciones.astro — Sección de instalaciones / "La Pared"
+---
+
+<section id="high" class="facilities-section">
+  <div class="content-container facilities-grid">
+    <div class="facilities-text">
+      <h2 class="section-title">La Pared</h2>
+      <p class="facilities-desc">
+        Inspirada en la arista del Ama Dablam, nuestra arena vertical de
+        construcción propia ofrece más de 20 vías de 5a a 8c+. No es solo un
+        gimnasio; es un campo de entrenamiento técnico.
+      </p>
+      <ul class="features-list">
+        <li>
+          <span class="feature-line"></span><span>18 m de cara vertical</span>
+        </li>
+        <li>
+          <span class="feature-line"></span><span>Desplomes negativos</span>
+        </li>
+        <li>
+          <span class="feature-line"></span><span
+            >Zonas de escalada en cabeza y autoaseguro</span
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="facilities-visual">
+      <div class="visual-box">
+        <div class="visual-overlay"></div>
+        <div class="visual-content">
+          <span class="visual-number">02</span>
+          <p class="visual-quote">
+            «La mejor instalación de entrenamiento indoor de la región.» —
+            Alpine Mag
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 3rem;
+      text-align: left;
+    }
+  }
+
+  .facilities-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .facilities-grid {
+      gap: 3rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .facilities-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .facilities-desc {
+    font-size: 1.125rem;
+    color: #e5e7eb;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .features-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .feature-line {
+    width: 3rem;
+    height: 4px;
+    background-color: var(--clr-main);
+    flex-shrink: 0;
+  }
+
+  .facilities-visual {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .facilities-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .visual-box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .visual-box:hover .visual-overlay {
+    background-color: transparent;
+  }
+
+  .visual-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(247, 127, 0, 0.1);
+    transition: background-color 0.3s;
+  }
+
+  .visual-content {
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 1rem;
+    height: calc(100% - 2rem);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+  }
+
+  .visual-number {
+    font-size: 6rem;
+    font-weight: 900;
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 1;
+  }
+
+  .visual-quote {
+    font-style: italic;
+    color: var(--clr-main);
+  }
+</style>

@@ -1,0 +1,79 @@
+---
+// SectionBase.astro — Sección de inicio / Base del ascenso
+---
+
+<section id="base" class="hero-section">
+  <div class="content-container text-center">
+    <div class="icon-container animate-float">
+      <img
+        src="/amadablam/favicon.svg"
+        alt="Logo Ama Dablam"
+        width="320"
+        height="320"
+        style="display:block;"
+      />
+    </div>
+    <h1 class="main-title">Ama Dablam</h1>
+    <p class="sub-title">San Pedro Alcántara</p>
+    <div class="cta-container">
+      <a href="#low" class="btn-primary nav-item" data-target="low"
+        >¡COMIENZA EL ASCENSO!</a
+      >
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hero Section */
+  .hero-section {
+    text-align: center;
+  }
+
+  .icon-container {
+    display: inline-block;
+  }
+
+  .main-title {
+    font-size: 3.75rem;
+    font-weight: 700;
+    margin-block: 1rem;
+    line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .main-title {
+      font-size: 8rem;
+    }
+  }
+
+  .sub-title {
+    font-size: 1.25rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--clr-main);
+    margin-bottom: 3rem;
+  }
+
+  .cta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .btn-primary {
+    padding: 1rem 2.5rem;
+    background-color: var(--clr-dark);
+    color: var(--clr-text);
+    font-weight: 900;
+    font-size: 1.125rem;
+    text-decoration: none;
+    transition: ease-in-out 0.3s;
+    border-radius: 16px;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--clr-main);
+    color: var(--clr-dark);
+  }
+</style>
