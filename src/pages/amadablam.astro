@@ -47,11 +47,11 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
             <a href="#base" class="nav-item active" data-target="base">Base</a>
           </li>
           <li>
-            <a href="#low" class="nav-item" data-target="low">Domina el Grado</a
+            <a href="#high" class="nav-item" data-target="high">Instalaciones</a
             >
           </li>
           <li>
-            <a href="#high" class="nav-item" data-target="high">Instalaciones</a
+            <a href="#low" class="nav-item" data-target="low">Domina el Grado</a
             >
           </li>
           <li>
@@ -67,8 +67,8 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
 
       {/* Secciones */}
       <SectionLaCima />
-      <SectionInstalaciones />
       <SectionDominaElGrado />
+      <SectionInstalaciones />
       <SectionBase />
     </main>
 
@@ -261,7 +261,7 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
       transform: translateY(0px);
     }
     50% {
-      transform: translateY(-10px);
+      transform: translateY(-30px);
     }
     100% {
       transform: translateY(0px);
@@ -269,7 +269,7 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
   }
 
   .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: float 2s ease-in-out infinite;
   }
 
   /* ── Contenedor principal ────────────────────────────── */

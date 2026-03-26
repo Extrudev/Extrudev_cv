@@ -3,22 +3,78 @@
 ---
 
 <section id="summit" class="summit-section">
+  <div class="content-container">
+    <h1 class="top-badge">¡Has llegado a la cima!</h1>
+  </div>
   <div class="content-container summit-grid">
     <div class="summit-text">
-      <div class="top-badge">¡Has llegado a la cima!</div>
       <h2 class="section-title">La Cima</h2>
       <p class="summit-quote">
         «Las mejores vistas llegan tras la escalada más dura.»
       </p>
-      <button class="btn-secondary">Únete al Club</button>
     </div>
-    <div class="summit-contact">
-      <h3>Preguntas y consultas</h3>
-      <button class="btn-outline">MÁNDANOS UN MENSAJE</button>
+
+    <div class="summit-right">
+      <a
+        href="https://maps.app.goo.gl/DotZusihTLH1V2K69"
+        target="_blank"
+        rel="noopener"
+        class="map-link"
+        aria-label="Ver en Google Maps"
+      >
+        <img
+          src="/amadablam/map.jpg"
+          alt="Mapa de localización del rocodromo El Tornillo, San Pedro Alcántara"
+          class="map-img"
+        />
+      </a>
+      <div class="location-info">
+        <div class="location-row">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Palacio de los Deportes Elena Benítez, San Pedro Alcántara</span
+          >
+        </div>
+        <div class="location-row">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Mar y Jue &nbsp;·&nbsp; 18:00 – 22:00</span>
+        </div>
+      </div>
+      <button class="btn-outline">CONTACTA CON NOSOTROS</button>
     </div>
   </div>
   <footer class="main-footer">
-    <span class="footer-copy">&copy; {new Date().getFullYear()} Club Alpino Ama Dablam. Elevando el potencial humano.</span>
+    <span class="footer-copy"
+      >&copy; {new Date().getFullYear()} Club Alpino Ama Dablam. Elevando el potencial
+      humano.</span
+    >
     <div class="site-by">
       Site by
       <a href="https://extrudev.com" target="_blank" rel="noopener">
@@ -44,6 +100,12 @@
 </section>
 
 <style>
+  .summit-section {
+    justify-content: flex-start;
+    padding-top: 3rem;
+    box-sizing: border-box;
+  }
+
   .section-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -67,10 +129,55 @@
 
   @media (min-width: 768px) {
     .summit-grid {
-      gap: 3rem;
+      gap: 20rem;
       grid-template-columns: repeat(2, 1fr);
       align-items: start;
     }
+  }
+
+  /* ── Right column ── */
+  .summit-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .map-link {
+    display: block;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .map-img {
+    display: block;
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+  }
+
+  .location-info {
+    background-color: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    border-left: 3px solid var(--clr-main);
+    padding: 0.65rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .location-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: #e5e7eb;
+    line-height: 1.4;
+  }
+
+  .location-row svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--clr-main);
   }
 
   .summit-text {
@@ -84,14 +191,11 @@
   }
 
   .top-badge {
-    display: inline-block;
-    background-color: #fff;
-    color: #000;
+    display: table;
+    margin: 0 auto 5rem auto;
     font-weight: 900;
-    padding: 0.25rem 1rem;
-    font-size: 0.875rem;
+    font-size: 4rem;
     text-transform: uppercase;
-    margin-bottom: 1rem;
   }
 
   .summit-quote {
@@ -145,7 +249,10 @@
     border: 1px solid #fff;
     background: transparent;
     color: #fff;
+    font-family: var(--font-display);
     font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
     transition: all 0.3s;
     cursor: pointer;
     border-radius: 4px;
@@ -161,6 +268,7 @@
     bottom: 0;
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1.25rem 2rem;
@@ -175,8 +283,6 @@
   }
 
   .site-by {
-    position: absolute;
-    right: 2rem;
     display: flex;
     align-items: center;
     gap: 0.2rem;
@@ -201,4 +307,3 @@
     color: var(--clr-main);
   }
 </style>
-

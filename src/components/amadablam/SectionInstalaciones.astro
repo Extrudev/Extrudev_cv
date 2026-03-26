@@ -1,44 +1,156 @@
 ---
 // SectionInstalaciones.astro — Sección de instalaciones / "La Pared"
+
+const slides = [
+  {
+    src: "/amadablam/wall/chica-bandera-tornillo.jpg",
+    alt: "Escaladora ascendiendo el Tornillo con la bandera del Club Alpino Ama Dablam",
+    quote: "«Vías diseñadas para llevarte al siguiente nivel.»",
+  },
+  {
+    src: "/amadablam/wall/tobillo-evento-exterior.jpg",
+    alt: "Vista exterior del Tornillo durante un evento de escalada en San Pedro Alcántara",
+    quote: "«Una arena construida con pasión por la montaña.»",
+  },
+  {
+    src: "/amadablam/wall/escalador-cielo-azul.jpg",
+    alt: "Escalador en lo alto del Tornillo bajo un cielo azul despejado",
+    quote: "«El lugar donde los escaladores de verdad entrenan.»",
+  },
+  {
+    src: "/amadablam/wall/escalada-nubes-dramaticas.jpg",
+    alt: "Escaladora en las vías del Tornillo con nubes dramáticas al fondo",
+    quote: "«El Tornillo: donde el reto comienza desde el suelo.»",
+  },
+];
 ---
 
 <section id="high" class="facilities-section">
   <div class="content-container facilities-grid">
     <div class="facilities-text">
-      <h2 class="section-title">La Pared</h2>
+      <h2 class="section-title">El "Tornillo"</h2>
       <p class="facilities-desc">
-        Inspirada en la arista del Ama Dablam, nuestra arena vertical de
+        Nuestras instalaciones a parte de contar con una arena vertical de
         construcción propia ofrece más de 20 vías de 5a a 8c+. No es solo un
         gimnasio; es un campo de entrenamiento técnico.
       </p>
       <ul class="features-list">
         <li>
-          <span class="feature-line"></span><span>18 m de cara vertical</span>
+          <span class="feature-line"></span><span>15 m de cara vertical</span>
         </li>
         <li>
           <span class="feature-line"></span><span>Desplomes negativos</span>
         </li>
         <li>
           <span class="feature-line"></span><span
-            >Zonas de escalada en cabeza y autoaseguro</span
+            >Zonas de desplome y boulders</span
           >
         </li>
       </ul>
     </div>
+
     <div class="facilities-visual">
       <div class="visual-box">
-        <div class="visual-overlay"></div>
-        <div class="visual-content">
-          <span class="visual-number">02</span>
-          <p class="visual-quote">
-            «La mejor instalación de entrenamiento indoor de la región.» —
-            Alpine Mag
-          </p>
+        {/* Slides */}
+        <div class="gallery-track" id="galleryTrack">
+          {
+            slides.map((slide, i) => (
+              <div
+                class={`gallery-slide${i === 0 ? " active" : ""}`}
+                data-index={i}
+              >
+                <img src={slide.src} alt={slide.alt} />
+                <p class="visual-quote">{slide.quote}</p>
+              </div>
+            ))
+          }
+        </div>
+
+        {/* Flechas */}
+        <button
+          class="gallery-arrow arrow-prev"
+          id="arrowPrev"
+          aria-label="Anterior"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button
+          class="gallery-arrow arrow-next"
+          id="arrowNext"
+          aria-label="Siguiente"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        {/* Dots */}
+        <div class="gallery-dots" id="galleryDots">
+          {
+            slides.map((_, i) => (
+              <button
+                class={`dot${i === 0 ? " active" : ""}`}
+                data-dot={i}
+                aria-label={`Ir a foto ${i + 1}`}
+              />
+            ))
+          }
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const track = document.getElementById("galleryTrack");
+  const dotsContainer = document.getElementById("galleryDots");
+  const prevBtn = document.getElementById("arrowPrev");
+  const nextBtn = document.getElementById("arrowNext");
+
+  if (track && dotsContainer && prevBtn && nextBtn) {
+    const slides = Array.from(
+      track.querySelectorAll<HTMLElement>(".gallery-slide"),
+    );
+    const dots = Array.from(
+      dotsContainer.querySelectorAll<HTMLElement>(".dot"),
+    );
+    let current = 0;
+
+    function goTo(index: number) {
+      slides[current].classList.remove("active");
+      dots[current].classList.remove("active");
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add("active");
+      dots[current].classList.add("active");
+    }
+
+    prevBtn.addEventListener("click", () => goTo(current - 1));
+    nextBtn.addEventListener("click", () => goTo(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+  }
+</script>
 
 <style>
   .section-title {
@@ -115,52 +227,120 @@
     }
   }
 
+  /* ── Visual box (unchanged dimensions) ── */
   .visual-box {
     width: 100%;
     aspect-ratio: 1 / 1;
+    max-height: 65vh;
     border: 4px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
   }
 
-  .visual-box:hover .visual-overlay {
-    background-color: transparent;
-  }
-
-  .visual-overlay {
+  /* ── Gallery track ── */
+  .gallery-track {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(247, 127, 0, 0.1);
-    transition: background-color 0.3s;
+    inset: 0;
   }
 
-  .visual-content {
-    padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin: 1rem;
-    height: calc(100% - 2rem);
-    box-sizing: border-box;
+  .gallery-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    position: relative;
   }
 
-  .visual-number {
-    font-size: 6rem;
-    font-weight: 900;
-    opacity: 0.1;
+  .gallery-slide.active {
+    opacity: 1;
+  }
+
+  .gallery-slide img {
     position: absolute;
-    top: 0;
-    right: 0;
-    line-height: 1;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
+  /* ── Quote overlay ── */
   .visual-quote {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    padding: 1.25rem 1.5rem;
     font-style: italic;
-    color: var(--clr-main);
+    font-size: 0.8rem;
+    color: #fff;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+    line-height: 1.4;
+  }
+
+  /* ── Arrows ── */
+  .gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+    padding: 0;
+  }
+
+  .gallery-arrow:hover {
+    background: var(--clr-main);
+    border-color: var(--clr-main);
+    color: #000;
+  }
+
+  .arrow-prev {
+    left: 0.75rem;
+  }
+
+  .arrow-next {
+    right: 0.75rem;
+  }
+
+  /* ── Dots ── */
+  .gallery-dots {
+    position: absolute;
+    bottom: 0.65rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 0;
+    transition:
+      background 0.2s,
+      transform 0.2s;
+  }
+
+  .dot.active {
+    background: var(--clr-main);
+    transform: scale(1.4);
   }
 </style>
