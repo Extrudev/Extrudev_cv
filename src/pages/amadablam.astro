@@ -47,13 +47,16 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
             <a href="#base" class="nav-item active" data-target="base">Base</a>
           </li>
           <li>
-            <a href="#low" class="nav-item" data-target="low">Domina el Grado</a>
+            <a href="#low" class="nav-item" data-target="low">Domina el Grado</a
+            >
           </li>
           <li>
-            <a href="#high" class="nav-item" data-target="high">Instalaciones</a>
+            <a href="#high" class="nav-item" data-target="high">Instalaciones</a
+            >
           </li>
           <li>
-            <a href="#summit" class="nav-item" data-target="summit">¡La Cima!</a>
+            <a href="#summit" class="nav-item" data-target="summit">¡La Cima!</a
+            >
           </li>
         </ul>
         {/* Barra de progreso */}
@@ -76,10 +79,16 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
         window.innerWidth >= 1024 &&
         !window.matchMedia("(pointer: coarse)").matches;
 
-      const container = document.getElementById("climb-container") as HTMLElement;
+      const container = document.getElementById(
+        "climb-container",
+      ) as HTMLElement;
       const bg = document.getElementById("dynamic-bg") as HTMLElement | null;
-      const progressBar = document.getElementById("progress-bar") as HTMLElement | null;
-      const progressTrack = document.querySelector(".progress-track") as HTMLElement | null;
+      const progressBar = document.getElementById(
+        "progress-bar",
+      ) as HTMLElement | null;
+      const progressTrack = document.querySelector(
+        ".progress-track",
+      ) as HTMLElement | null;
       const sections = document.querySelectorAll("section");
 
       if (!container) throw new Error("climb-container no encontrado");
@@ -151,7 +160,9 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smoothWheel: true,
         });
-        lenis.on("scroll", ({ scroll }: { scroll: number }) => onScroll(scroll));
+        lenis.on("scroll", ({ scroll }: { scroll: number }) =>
+          onScroll(scroll),
+        );
 
         function raf(time: number) {
           lenis!.raf(time);
@@ -208,7 +219,15 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     font-display: swap;
   }
 
-  /* ── Variables ───────────────────────────────────────── */
+  /* ── Reset anchors ───────────────────────────────────── */
+  a,
+  a:visited,
+  a:hover,
+  a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+
   :root {
     --clr-dark: #003049;
     --clr-contrast: #d62828;
@@ -238,9 +257,15 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
 
   /* ── Animaciones ─────────────────────────────────────── */
   @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
   }
 
   .animate-float {
@@ -285,11 +310,11 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 25vw;
-    height: 25vh;
+    width: 40vw;
+    height: 40vh;
     z-index: 999;
     pointer-events: none;
-    opacity: 0.1;
+    opacity: 0.4;
     color: white;
     display: flex;
     align-items: center;

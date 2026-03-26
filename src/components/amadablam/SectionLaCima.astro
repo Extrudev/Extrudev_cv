@@ -18,8 +18,28 @@
     </div>
   </div>
   <footer class="main-footer">
-    &copy; {new Date().getFullYear()} Club Alpino Ama Dablam. Elevando el potencial
-    humano.
+    <span class="footer-copy">&copy; {new Date().getFullYear()} Club Alpino Ama Dablam. Elevando el potencial humano.</span>
+    <div class="site-by">
+      Site by
+      <a href="https://extrudev.com" target="_blank" rel="noopener">
+        EXTRUDEV
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1rem"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-terminal"
+        >
+          <polyline points="4 17 10 11 4 5"></polyline>
+          <line x1="12" y1="19" x2="20" y2="19"></line>
+        </svg>
+      </a>
+    </div>
   </footer>
 </section>
 
@@ -140,10 +160,45 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    text-align: center;
-    padding: 2.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 2rem;
     border-top: 1px solid var(--clr-main);
     color: var(--clr-main);
-    font-size: 1rem;
+    font-size: 0.85rem;
+    box-sizing: border-box;
+  }
+
+  .footer-copy {
+    text-align: center;
+  }
+
+  .site-by {
+    position: absolute;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.45);
+    white-space: nowrap;
+  }
+
+  .site-by a {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 700;
+    transition: color 0.3s;
+  }
+
+  .site-by a:hover {
+    color: var(--clr-main);
   }
 </style>
+

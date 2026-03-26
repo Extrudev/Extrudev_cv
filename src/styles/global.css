@@ -32,7 +32,8 @@ body {
     overflow-x: hidden;
 }
 
-a {
+a,
+a:visited {
     text-decoration: none;
     color: inherit;
     transition: var(--transition-smooth);
