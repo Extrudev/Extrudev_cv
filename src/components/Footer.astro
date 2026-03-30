@@ -1,12 +1,14 @@
 ---
-const { personalInfo } = (await import("../data/data.json")).default;
+const { lang = 'es' } = Astro.props;
+const data = (await import("../data/data.json")).default as any;
+const { personalInfo } = data[lang];
 const year = new Date().getFullYear();
 ---
 
 <footer id="contact" class="main-footer">
     <div class="footer-container">
         <div class="footer-info">
-            <h2 class="footer-title">Contacta conmigo</h2>
+            <h2 class="footer-title">{lang === 'es' ? 'Contacta conmigo' : 'Contact me'}</h2>
             <div class="contact-links">
                 <a href={`mailto:${personalInfo.email}`} class="contact-item">
                     <svg

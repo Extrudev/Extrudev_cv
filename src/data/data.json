@@ -1,77 +1,160 @@
 {
-  "personalInfo": {
-    "name": "ExtruDev",
-    "role": "Desarrollador con 2 años de experiencia",
-    "location": "Marbella, Málaga",
-    "description": "Desarrollador web.",
-    "email": "info@extrudev.com",
-    "socials": {
-      "github": "https://github.com/Extrudev"
-    }
+  "es": {
+    "personalInfo": {
+      "name": "Luis",
+      "role": "Desarrollador con {{YEARS}} años de experiencia",
+      "location": "Marbella, Málaga",
+      "description": "Desarrollador web.",
+      "email": "info@extrudev.com",
+      "socials": {
+        "github": "https://github.com/Extrudev"
+      }
+    },
+    "experiencia": [
+      {
+        "id": 9,
+        "date": "Marzo 2026",
+        "title": "Landing page para Club de senderismo",
+        "subtitle": "Landing page premium con animacion customizada para club de senderismo ama dablam.",
+        "link": "/amadablam"
+      },
+      {
+        "id": 8,
+        "date": "Febrero 2026",
+        "title": "Web premium inmobiliaria",
+        "subtitle": "Web premium inmobiliaria con catalogo dinámico y animaciones, conectada y sincronizada con su propia API.",
+        "link": "https://www.grupoadosa.com"
+      },
+      {
+        "id": 6,
+        "date": "Febrero 2024",
+        "title": "Landing Page para Grupo Musical",
+        "subtitle": "Landing page sencilla para grupo 'Among Us' para sus redes sociales y contratación.",
+        "link": "https://www.amongus.band"
+      }
+    ],
+    "formacion": [
+      {
+        "id": 7,
+        "date": "Enero 2025",
+        "title": "Curso FullStack",
+        "subtitle": "Siguiendo curso de FullStack. Desarrollando y colaborando en diferentes repositorios de Github.",
+        "link": "https://www.jscamp.dev/"
+      },
+      {
+        "id": 5,
+        "date": "Noviembre 2023",
+        "title": "Especialización framework 'Astro'",
+        "subtitle": "Prácticas de desarrollo de diferentes aplicaciones dinámicas.",
+        "link": null
+      },
+      {
+        "id": 4,
+        "date": "Septiembre 2023",
+        "title": "JavaScript de 'Midudev'",
+        "subtitle": "Ejercicios de la web de aprendizaje de JavaScript del developer 'Midudev'.",
+        "link": "https://www.aprendejavascript.dev/"
+      },
+      {
+        "id": 3,
+        "date": "Agosto 2023",
+        "title": "Iniciación framework 'Astro'",
+        "subtitle": "Ejercicios del developer 'Midudev' elaboración de Landing pages varias.",
+        "link": null
+      },
+      {
+        "id": 2,
+        "date": "Junio 2023",
+        "title": "Curso CSS de 'HolaMundo'",
+        "subtitle": "Curso integral de CSS con sus últimas actualizaciones y tecnologías incluyendo ejercicios prácticos.",
+        "link": "https://youtu.be/wZniZEbPAzk?si=d9doPnbyFy3L5wbh"
+      },
+      {
+        "id": 1,
+        "date": "Marzo 2023",
+        "title": "Curso HTML5 de 'HolaMundo'",
+        "subtitle": "Curso integral de HTML5 con sus últimas actualizaciones y tecnologías incluyendo ejercicios prácticos.",
+        "link": "https://youtu.be/MJkdaVFHrto?si=Are2z6-9wVIAf8CH"
+      }
+    ]
   },
-  "experiences": [
-    {
-      "id": 9,
-      "date": "Marzo 2026",
-      "title": "Landig page para Club de senderismo",
-      "subtitle": "Landig page premium con animacion customizada para club de senderismo ama dablam.",
-      "link": "/amadablam"
+  "en": {
+    "personalInfo": {
+      "name": "Luis",
+      "role": "Developer with {{YEARS}} years of experience",
+      "location": "Marbella, Málaga",
+      "description": "Web Developer.",
+      "email": "info@extrudev.com",
+      "socials": {
+        "github": "https://github.com/Extrudev"
+      }
     },
-    {
-      "id": 8,
-      "date": "Febrero 2026",
-      "title": "web premium inmobiliaria",
-      "subtitle": "Web premium inmobiliaria con catalogo dinámico y animaciones, conectada y sincronizada con su propia API.",
-      "link": "https://www.grupoadosa.com"
-    },
-    {
-      "id": 7,
-      "date": "Enero 2025",
-      "title": "Curso FullStack",
-      "subtitle": "Siguiendo curso de FullStack. Desarrollando y colaborando en diferentes repositorios de Github.",
-      "link": "https://www.jscamp.dev/"
-    },
-    {
-      "id": 6,
-      "date": "Febrero 2024",
-      "title": "Landing Page para Grupo Musical",
-      "subtitle": "Landing page sencilla para grupo 'Among Us' para sus redes sociales y contratación.",
-      "link": "https://www.amongus.band"
-    },
-    {
-      "id": 5,
-      "date": "Noviembre 2023",
-      "title": "Especialización framework 'Astro'",
-      "subtitle": "Prácticas de desarrollo de diferentes aplicaciones dinámicas.",
-      "link": null
-    },
-    {
-      "id": 4,
-      "date": "Septiembre 2023",
-      "title": "JavaScript de 'Midudev'",
-      "subtitle": "Ejercicios de la web de aprendizaje de JavaScript del developer 'Midudev'.",
-      "link": "https://www.aprendejavascript.dev/"
-    },
-    {
-      "id": 3,
-      "date": "Agosto 2023",
-      "title": "Iniciación framework 'Astro'",
-      "subtitle": "Ejercicios del developer 'Midudev' elaboración de Landing pages varias.",
-      "link": null
-    },
-    {
-      "id": 2,
-      "date": "Junio 2023",
-      "title": "Curso CSS de 'HolaMundo'",
-      "subtitle": "Curso integral de CSS con sus últimas actualizaciones y tecnologías incluyendo ejercicios prácticos.",
-      "link": "https://youtu.be/wZniZEbPAzk?si=d9doPnbyFy3L5wbh"
-    },
-    {
-      "id": 1,
-      "date": "Marzo 2023",
-      "title": "Curso HTML5 de 'HolaMundo'",
-      "subtitle": "Curso integral de HTML5 con sus últimas actualizaciones y tecnologías incluyendo ejercicios prácticos.",
-      "link": "https://youtu.be/MJkdaVFHrto?si=Are2z6-9wVIAf8CH"
-    }
-  ]
+    "experiencia": [
+      {
+        "id": 9,
+        "date": "March 2026",
+        "title": "Landing page for Hiking Club",
+        "subtitle": "Premium landing page with customized animation for the 'Ama Dablam' hiking club.",
+        "link": "/amadablam"
+      },
+      {
+        "id": 8,
+        "date": "February 2026",
+        "title": "Premium Real Estate Website",
+        "subtitle": "Premium real estate website with dynamic catalog and animations, connected and synced with its own API.",
+        "link": "https://www.grupoadosa.com"
+      },
+      {
+        "id": 6,
+        "date": "February 2024",
+        "title": "Landing Page for Music Band",
+        "subtitle": "Simple landing page for 'Among Us' band for their social media and booking.",
+        "link": "https://www.amongus.band"
+      }
+    ],
+    "formacion": [
+      {
+        "id": 7,
+        "date": "January 2025",
+        "title": "FullStack Course",
+        "subtitle": "Following a FullStack course. Developing and collaborating on different GitHub repositories.",
+        "link": "https://www.jscamp.dev/"
+      },
+      {
+        "id": 5,
+        "date": "November 2023",
+        "title": "'Astro' Framework Specialization",
+        "subtitle": "Development practices with different dynamic applications.",
+        "link": null
+      },
+      {
+        "id": 4,
+        "date": "September 2023",
+        "title": "JavaScript by 'Midudev'",
+        "subtitle": "Exercises from the JavaScript learning website by developer 'Midudev'.",
+        "link": "https://www.aprendejavascript.dev/"
+      },
+      {
+        "id": 3,
+        "date": "August 2023",
+        "title": "'Astro' Framework Initiation",
+        "subtitle": "Exercises by developer 'Midudev' creating various Landing pages.",
+        "link": null
+      },
+      {
+        "id": 2,
+        "date": "June 2023",
+        "title": "CSS Course by 'HolaMundo'",
+        "subtitle": "Comprehensive CSS course with latest updates and technologies including practical exercises.",
+        "link": "https://youtu.be/wZniZEbPAzk?si=d9doPnbyFy3L5wbh"
+      },
+      {
+        "id": 1,
+        "date": "March 2023",
+        "title": "HTML5 Course by 'HolaMundo'",
+        "subtitle": "Comprehensive HTML5 course with latest updates and technologies including practical exercises.",
+        "link": "https://youtu.be/MJkdaVFHrto?si=Are2z6-9wVIAf8CH"
+      }
+    ]
+  }
 }

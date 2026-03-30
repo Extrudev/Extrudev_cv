@@ -1,5 +1,8 @@
 ---
-const { personalInfo } = (await import("../data/data.json")).default;
+const { lang = "es" } = Astro.props;
+const data = (await import("../data/data.json")).default as any;
+const { personalInfo } = data[lang];
+const roleDynamic = personalInfo.role.replace('{{YEARS}}', new Date().getFullYear() - 2023);
 ---
 
 <section id="top" class="hero">
@@ -8,13 +11,20 @@ const { personalInfo } = (await import("../data/data.json")).default;
             <div class="avatar-img">
                 <img src="/img/avatar.png" alt="avatar" />
             </div>
-            <h1 class="hero-title">
-                ¡Hola! Soy <span class="header-name">{personalInfo.name}</span>
+            <h1
+                class="hero-title"
+                id="typewriter-title"
+                data-part1={lang === "es" ? "¡Hola! Soy " : "Hi! I'm "}
+                data-part2={personalInfo.name}
+            >
+                <span id="tw-text-1"></span><span
+                    class="header-name"
+                    id="tw-text-2"></span>
             </h1>
         </div>
 
         <div class="role-container">
-            <h2 class="hero-role">{personalInfo.role}</h2>
+            <h2 class="hero-role">{roleDynamic}</h2>
         </div>
 
         <div class="hero-desc">
@@ -23,15 +33,14 @@ const { personalInfo } = (await import("../data/data.json")).default;
             <span class="syntax-bracket">]</span>
             <span class="syntax-arrow">=&gt;</span>
             <span class="syntax-arrow">(</span>
-            Residente en <span class="syntax-arrow"
-                >{personalInfo.location}</span
-            >.
+            {lang === "es" ? "Residente en " : "Based in "}
+            <span class="syntax-arrow">{personalInfo.location}</span>.
             <span class="syntax-arrow">)</span>
         </div>
 
         <div class="status-badge">
             <span class="status-dot"></span>
-            Actualmente Disponible
+            {lang === "es" ? "Actualmente Disponible" : "Currently Available"}
         </div>
 
         <div class="hero-actions">
@@ -43,7 +52,7 @@ const { personalInfo } = (await import("../data/data.json")).default;
                 GitHub
             </a>
             <a href={`mailto:${personalInfo.email}`} class="btn-premium">
-                Contáctame
+                {lang === "es" ? "Contáctame" : "Contact me"}
             </a>
         </div>
     </div>
@@ -70,7 +79,7 @@ const { personalInfo } = (await import("../data/data.json")).default;
         object-fit: cover;
     }
     .hero {
-        min-height: 80vh;
+        min-height: 60vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -110,10 +119,10 @@ const { personalInfo } = (await import("../data/data.json")).default;
         margin-bottom: 0;
         color: var(--text);
         border-right: 4px solid var(--primary);
-        white-space: nowrap;
         display: inline-block;
         padding-right: 8px;
         animation: blink-caret 0.75s step-end infinite;
+        word-break: break-word;
     }
 
     .role-container {
@@ -131,6 +140,8 @@ const { personalInfo } = (await import("../data/data.json")).default;
         font-size: 1.2rem;
         line-height: 1.7;
         color: var(--text);
+        word-wrap: break-word;
+        max-width: 100%;
     }
 
     .syntax-bracket {
@@ -176,3 +187,37 @@ const { personalInfo } = (await import("../data/data.json")).default;
         }
     }
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const title = document.getElementById("typewriter-title");
+        if (!title) return;
+
+        const part1 = title.getAttribute("data-part1") || "";
+        const part2 = title.getAttribute("data-part2") || "";
+        const span1 = document.getElementById("tw-text-1");
+        const span2 = document.getElementById("tw-text-2");
+
+        if (span1) span1.textContent = "";
+        if (span2) span2.textContent = "";
+
+        const fullText = part1 + part2;
+        let i = 0;
+        const speed = 60; // ms per char
+
+        function typeWriter() {
+            if (i < fullText.length) {
+                if (i < part1.length) {
+                    if (span1) span1.textContent += fullText.charAt(i);
+                } else {
+                    if (span2) span2.textContent += fullText.charAt(i);
+                }
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // Pequeño retraso inicial para que se vea el efecto
+        setTimeout(typeWriter, 300);
+    });
+</script>
