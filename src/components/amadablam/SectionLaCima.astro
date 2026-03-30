@@ -27,6 +27,23 @@
           alt="Mapa de localización del rocodromo El Tornillo, San Pedro Alcántara"
           class="map-img"
         />
+        <div class="map-overlay"></div>
+        <!-- Flecha indicadora flotante (pointer-events: none) -->
+        <svg
+          class="map-pointer"
+          xmlns="http://www.w3.org/2000/svg"
+          width="48"
+          height="48"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="var(--clr-accent)"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="12" y1="3" x2="12" y2="21"></line>
+          <polyline points="19 14 12 21 5 14"></polyline>
+        </svg>
       </a>
       <div class="location-info">
         <div class="location-row">
@@ -106,6 +123,12 @@
     box-sizing: border-box;
   }
 
+  @media (max-width: 1023px) {
+    .summit-section {
+      padding-top: 1rem; /* Compactar header superior para meter todo el contenido */
+    }
+  }
+
   .section-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -129,9 +152,15 @@
 
   @media (min-width: 768px) {
     .summit-grid {
-      gap: 20rem;
+      gap: 1.5rem; /* Ajustadísimo para que quepa verticalmente en un iPad */
       grid-template-columns: repeat(2, 1fr);
       align-items: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .summit-grid {
+      gap: 15rem; /* Devolver el aire a las columnas solo en pantallas grandes */
     }
   }
 
@@ -146,6 +175,15 @@
     display: block;
     overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+  }
+
+  .map-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+    z-index: 1;
   }
 
   .map-img {
@@ -163,6 +201,14 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+  }
+
+  @media (max-width: 767px) {
+    .summit-text,
+    .map-link,
+    .map-pointer {
+      display: none !important;
+    }
   }
 
   .location-row {
@@ -196,6 +242,20 @@
     font-weight: 900;
     font-size: 4rem;
     text-transform: uppercase;
+  }
+
+  @media (max-width: 1023px) {
+    .top-badge {
+      font-size: 2.5rem;
+      margin: 0 auto 2rem auto; /* Squeeze margin para tablet y movil */
+    }
+  }
+
+  @media (max-width: 767px) {
+    .top-badge {
+      font-size: 2.1rem;
+      margin: 0 auto 1.5rem auto;
+    }
   }
 
   .summit-quote {
@@ -278,6 +338,13 @@
     box-sizing: border-box;
   }
 
+  @media (max-width: 1023px) {
+    .main-footer {
+      position: relative !important;
+      margin-top: 2rem;
+    }
+  }
+
   .footer-copy {
     text-align: center;
   }
@@ -305,5 +372,28 @@
 
   .site-by a:hover {
     color: var(--clr-main);
+  }
+</style>
+
+<style is:global>
+  /* Extraemos la flecha a global para asegurar que sus keyframes no se pierdan */
+  .map-pointer {
+    position: absolute !important;
+    top: 55% !important; /* Apuntando hacia abajo-izquierda sobre la caseta */
+    left: 40% !important;
+    rotate: 45deg;
+    pointer-events: none !important;
+    animation: pointerBounce 1.5s infinite cubic-bezier(0.28, 0.84, 0.42, 1) !important;
+    z-index: 10;
+  }
+
+  @keyframes pointerBounce {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(12px);
+    }
   }
 </style>

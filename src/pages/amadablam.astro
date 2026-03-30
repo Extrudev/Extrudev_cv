@@ -51,19 +51,24 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
       <nav class="fixed-nav">
         <ul class="nav-links">
           <li>
-            <a href="#base" class="nav-item active" data-target="base">Base</a>
+            <a href="#base" class="nav-item active" data-target="base">
+              <span class="nav-text">Base</span>
+            </a>
           </li>
           <li>
-            <a href="#high" class="nav-item" data-target="high">Instalaciones</a
-            >
+            <a href="#high" class="nav-item" data-target="high">
+              <span class="nav-text">Instalaciones</span>
+            </a>
           </li>
           <li>
-            <a href="#low" class="nav-item" data-target="low">Domina el Grado</a
-            >
+            <a href="#low" class="nav-item" data-target="low">
+              <span class="nav-text">Domina el Grado</span>
+            </a>
           </li>
           <li>
-            <a href="#summit" class="nav-item" data-target="summit">¡La Cima!</a
-            >
+            <a href="#summit" class="nav-item" data-target="summit">
+              <span class="nav-text">¡La Cima!</span>
+            </a>
           </li>
         </ul>
         {/* Barra de progreso */}
@@ -191,10 +196,10 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
       }
 
       // --- LOGICA DEL PRELOADER ---
-      const loaderOverlay = document.getElementById('amadablam-loader');
-      const progressBarEl = document.getElementById('ama-progress-bar');
-      const nativeLogo = document.querySelector('#base .icon-container');
-      
+      const loaderOverlay = document.getElementById("amadablam-loader");
+      const progressBarEl = document.getElementById("ama-progress-bar");
+      const nativeLogo = document.querySelector("#base .icon-container");
+
       let loadProgress = 0;
       let isWindowLoaded = false;
       let isLoaderFinished = false;
@@ -203,35 +208,35 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
         if (!progressBarEl) return;
         const incr = Math.random() * 8 + 4; // ~16 steps total
         loadProgress += incr;
-        
+
         // Pausar al 90% esperando recursos de la carga real
         if (loadProgress >= 90 && !isWindowLoaded) {
-          loadProgress = 90; 
+          loadProgress = 90;
         }
         if (loadProgress > 100) loadProgress = 100;
-        
+
         progressBarEl.style.width = `${loadProgress}%`;
 
         if (loadProgress < 100) {
           const pause = Math.random() * 300 + 150; // media de ~225ms (aprox 4s total)
           setTimeout(simulateProgress, pause);
         } else {
-           finishLoader();
+          finishLoader();
         }
       }
 
       function finishLoader() {
-         if (isLoaderFinished) return;
-         isLoaderFinished = true;
-         setTimeout(() => {
-             if (loaderOverlay) loaderOverlay.style.opacity = '0';
-             container.classList.remove('locked'); // Liberamos el scroll
+        if (isLoaderFinished) return;
+        isLoaderFinished = true;
+        setTimeout(() => {
+          if (loaderOverlay) loaderOverlay.style.opacity = "0";
+          container.classList.remove("locked"); // Liberamos el scroll
 
-             setTimeout(() => {
-                 if (loaderOverlay) loaderOverlay.style.display = 'none';
-                 if (nativeLogo) nativeLogo.classList.add('logo-normal');
-             }, 800);
-         }, 400); // pequeña pausa en 100%
+          setTimeout(() => {
+            if (loaderOverlay) loaderOverlay.style.display = "none";
+            if (nativeLogo) nativeLogo.classList.add("logo-normal");
+          }, 800);
+        }, 400); // pequeña pausa en 100%
       }
 
       // Arrancamos la simulación del loader
@@ -241,15 +246,15 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
         setTimeout(() => {
           container.scrollTop = container.scrollHeight;
           syncProgressTrackHeight();
-          
-          if (nativeLogo) nativeLogo.classList.add('logo-loaded'); // Hacer visible el logo SOBRE el loader
+
+          if (nativeLogo) nativeLogo.classList.add("logo-loaded"); // Hacer visible el logo SOBRE el loader
           isWindowLoaded = true;
 
           // Si el loader se pausó, terminarlo
           if (loadProgress >= 90 && loadProgress < 100) {
-             loadProgress = 100;
-             if (progressBarEl) progressBarEl.style.width = '100%';
-             finishLoader();
+            loadProgress = 100;
+            if (progressBarEl) progressBarEl.style.width = "100%";
+            finishLoader();
           }
 
           if (isDesktop()) {
@@ -277,9 +282,23 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
 <style is:global>
   /* ── Fuentes ─────────────────────────────────────────── */
   @font-face {
-    font-family: "Thunder-VF";
-    src: url("/amadablam/font/Thunder-VF.ttf") format("truetype");
-    font-weight: 100 900;
+    font-family: "MadeInfinity";
+    src: url("/amadablam/font/MADEINFINITYPersonalUse-Black.otf");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "MadeInfinity-Outline";
+    src: url("/amadablam/font/MADEINFINITYOutlinePersonalUse-Black.otf");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "MadeInfinity-Beside";
+    src: url("/amadablam/font/MADEINFINITYBesidePersonalUse-Black.otf");
+    font-weight: 900;
     font-style: normal;
     font-display: swap;
   }
@@ -303,7 +322,9 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     --clr-surface: rgba(0, 48, 73, 0.78);
     --clr-overlay: rgba(0, 0, 0, 0.45);
     --clr-border: rgba(255, 255, 255, 0.12);
-    --font-display: "Thunder-VF", sans-serif;
+    --font-display: "MadeInfinity", sans-serif;
+    --font-outline: "MadeInfinity-Outline", sans-serif;
+    --font-beside: "MadeInfinity-Beside", sans-serif;
     --font-body: "Sora", sans-serif;
     --nav-right: 2rem;
   }
@@ -318,6 +339,20 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     font-family: var(--font-body);
     color: var(--clr-text);
     background-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .top-badge,
+  .main-title,
+  .section-title {
+    font-family: "MadeInfinity", "Sora", sans-serif !important;
+    font-weight: 900;
+    letter-spacing: -0.05em;
   }
 
   /* ── Animaciones ─────────────────────────────────────── */
@@ -354,12 +389,22 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
 
   /* ── Secciones ───────────────────────────────────────── */
   section {
-    height: 100vh;
+    min-height: 100dvh;
+    height: auto; /* Dejar crecer según contenido nativo */
+    padding: 6rem 0; /* Padding protector para tablet/movil top/bottom */
+    box-sizing: border-box;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+
+  @media (min-width: 1024px) {
+    section {
+      height: 100vh;
+      padding: 0;
+    }
   }
 
   /* ── Shared layout ───────────────────────────────────── */
@@ -368,6 +413,20 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     width: 100%;
     padding: 0 1.5rem;
     box-sizing: border-box;
+  }
+
+  @media (max-width: 1023px) {
+    .content-container {
+      padding-left: 2rem;
+      padding-right: 3rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .content-container {
+      padding-left: 1.5rem;
+      padding-right: 2rem;
+    }
   }
 </style>
 
@@ -431,7 +490,10 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
   }
 
   .nav-item {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
     text-decoration: none;
     color: var(--clr-text-muted);
     font-size: 0.7rem;
@@ -440,6 +502,14 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     letter-spacing: 0.12em;
     white-space: nowrap;
     transition: all 0.3s ease;
+  }
+
+  .nav-dot {
+    display: none; /* Oculto en desktop por defecto */
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
   }
 
   .nav-item:hover {
@@ -475,9 +545,44 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     transition: height 0.15s ease;
   }
 
-  @media (max-width: 767px) {
+  /* ── Versión Tablets y Móviles ───────────────────────────── */
+  @media (max-width: 1023px) {
     .fixed-nav {
-      display: none;
+      right: 0;
+      top: 0;
+      transform: translateY(0);
+      height: 100dvh;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .nav-links {
+      display: none !important; /* Asegurar eliminación total de los puntos y textos */
+    }
+
+    .nav-item {
+      padding: 1rem;
+      scale: 1 !important; /* Desactivar scale de desktop */
+    }
+
+    .nav-text {
+      display: none; /* Ocular textos */
+    }
+
+    .nav-dot {
+      display: none !important; /* Eliminados por completo en responsive */
+    }
+
+    .nav-item.active .nav-dot {
+      display: none !important;
+    }
+
+    .progress-track {
+      height: 100dvh !important; /* 100dvh obligatorio */
+      width: 10px; /* Un poco mas ancho para que se toque con el dedo si se quiere */
+      border-radius: 0; /* Sin curvas, va de lado a lado */
+      margin-right: 0px;
+      box-shadow: none !important;
     }
   }
 
@@ -502,7 +607,6 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     left: 0;
     width: 100dvw;
     height: 10dvh;
-    background: rgba(255, 255, 255, 0.05);
     overflow: hidden;
   }
   .ama-progress-bar {
