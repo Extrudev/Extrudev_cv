@@ -1,7 +1,7 @@
 {
   "es": {
     "personalInfo": {
-      "name": "Luis",
+      "name": "ExtruDev",
       "role": "Desarrollador con {{YEARS}} años de experiencia",
       "location": "Marbella, Málaga",
       "description": "Desarrollador web.",
@@ -14,8 +14,8 @@
       {
         "id": 9,
         "date": "Marzo 2026",
-        "title": "Landing page para Club de senderismo",
-        "subtitle": "Landing page premium con animacion customizada para club de senderismo ama dablam.",
+        "title": "Landing page para Club de alpinismo",
+        "subtitle": "Landing page premium con animacion customizada para club de alpinismo ama dablam.",
         "link": "/amadablam"
       },
       {

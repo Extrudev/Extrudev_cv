@@ -20,6 +20,13 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     />
   </head>
   <body>
+    {/* Loader Overlay */}
+    <div id="amadablam-loader" class="ama-loader">
+      <div class="ama-progress">
+        <div id="ama-progress-bar" class="ama-progress-bar"></div>
+      </div>
+    </div>
+
     {/* Watermark ExtruDev — centrado, no interactivo */}
     <div class="extrudev-watermark" aria-hidden="true">
       <svg
@@ -36,7 +43,7 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
       </svg>
     </div>
 
-    <main id="climb-container">
+    <main id="climb-container" class="locked">
       {/* Fondo dinámico con parallax */}
       <div id="dynamic-bg" class="bg-climb-wall"></div>
 
@@ -183,10 +190,68 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
         onScroll(container.scrollTop);
       }
 
+      // --- LOGICA DEL PRELOADER ---
+      const loaderOverlay = document.getElementById('amadablam-loader');
+      const progressBarEl = document.getElementById('ama-progress-bar');
+      const nativeLogo = document.querySelector('#base .icon-container');
+      
+      let loadProgress = 0;
+      let isWindowLoaded = false;
+      let isLoaderFinished = false;
+
+      function simulateProgress() {
+        if (!progressBarEl) return;
+        const incr = Math.random() * 8 + 4; // ~16 steps total
+        loadProgress += incr;
+        
+        // Pausar al 90% esperando recursos de la carga real
+        if (loadProgress >= 90 && !isWindowLoaded) {
+          loadProgress = 90; 
+        }
+        if (loadProgress > 100) loadProgress = 100;
+        
+        progressBarEl.style.width = `${loadProgress}%`;
+
+        if (loadProgress < 100) {
+          const pause = Math.random() * 300 + 150; // media de ~225ms (aprox 4s total)
+          setTimeout(simulateProgress, pause);
+        } else {
+           finishLoader();
+        }
+      }
+
+      function finishLoader() {
+         if (isLoaderFinished) return;
+         isLoaderFinished = true;
+         setTimeout(() => {
+             if (loaderOverlay) loaderOverlay.style.opacity = '0';
+             container.classList.remove('locked'); // Liberamos el scroll
+
+             setTimeout(() => {
+                 if (loaderOverlay) loaderOverlay.style.display = 'none';
+                 if (nativeLogo) nativeLogo.classList.add('logo-normal');
+             }, 800);
+         }, 400); // pequeña pausa en 100%
+      }
+
+      // Arrancamos la simulación del loader
+      setTimeout(simulateProgress, 50);
+
       window.addEventListener("load", () => {
         setTimeout(() => {
           container.scrollTop = container.scrollHeight;
           syncProgressTrackHeight();
+          
+          if (nativeLogo) nativeLogo.classList.add('logo-loaded'); // Hacer visible el logo SOBRE el loader
+          isWindowLoaded = true;
+
+          // Si el loader se pausó, terminarlo
+          if (loadProgress >= 90 && loadProgress < 100) {
+             loadProgress = 100;
+             if (progressBarEl) progressBarEl.style.width = '100%';
+             finishLoader();
+          }
+
           if (isDesktop()) {
             initLenis();
           } else {
@@ -272,12 +337,15 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     animation: float 2s ease-in-out infinite;
   }
 
-  /* ── Contenedor principal ────────────────────────────── */
   #climb-container {
     height: 100vh;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
+  }
+
+  #climb-container.locked {
+    overflow: hidden !important;
   }
 
   #climb-container::-webkit-scrollbar {
@@ -407,10 +475,54 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     transition: height 0.15s ease;
   }
 
-  /* ── Ocultar nav en mobile ───────────────────────────── */
   @media (max-width: 767px) {
     .fixed-nav {
       display: none;
     }
+  }
+
+  /* ── Loader Overlay y Modificador del Logo ───────────────────────────── */
+  .ama-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--clr-dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    transition: opacity 0.8s ease;
+  }
+  .ama-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100dvw;
+    height: 10dvh;
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+  }
+  .ama-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--clr-main);
+    transition: width 0.3s ease-out;
+  }
+
+  /* El logo nativo flota al frente durante el load */
+  :global(#base .icon-container) {
+    position: relative;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+  }
+  :global(#base .icon-container.logo-loaded) {
+    opacity: 1;
+  }
+  :global(#base .icon-container.logo-normal) {
+    z-index: 1; /* Retorna a z-index normal al terminar */
   }
 </style>

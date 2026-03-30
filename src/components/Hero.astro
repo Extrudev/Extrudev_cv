@@ -2,7 +2,10 @@
 const { lang = "es" } = Astro.props;
 const data = (await import("../data/data.json")).default as any;
 const { personalInfo } = data[lang];
-const roleDynamic = personalInfo.role.replace('{{YEARS}}', new Date().getFullYear() - 2023);
+const roleDynamic = personalInfo.role.replace(
+    "{{YEARS}}",
+    new Date().getFullYear() - 2023,
+);
 ---
 
 <section id="top" class="hero">
@@ -14,8 +17,7 @@ const roleDynamic = personalInfo.role.replace('{{YEARS}}', new Date().getFullYea
             <h1
                 class="hero-title"
                 id="typewriter-title"
-                data-part1={lang === "es" ? "¡Hola! Soy " : "Hi! I'm "}
-                data-part2={personalInfo.name}
+                data-part1={lang === "es" ? "¡Hola! Soy Luis" : "Hi! I'm Luis"}
             >
                 <span id="tw-text-1"></span><span
                     class="header-name"
@@ -51,7 +53,7 @@ const roleDynamic = personalInfo.role.replace('{{YEARS}}', new Date().getFullYea
             >
                 GitHub
             </a>
-            <a href={`mailto:${personalInfo.email}`} class="btn-premium">
+            <a href="#contact" class="btn-premium">
                 {lang === "es" ? "Contáctame" : "Contact me"}
             </a>
         </div>

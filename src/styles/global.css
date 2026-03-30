@@ -63,7 +63,14 @@ ul {
 .btn-premium:hover {
     background: var(--i-background-hover);
     border-color: var(--primary);
-    transform: translateY(-1px);
+}
+
+.icon-arrow {
+    transition: var(--transition-smooth);
+}
+
+.btn-premium:hover .icon-arrow {
+    transform: rotate(-45deg);
 }
 
 /* Typing Effect Keyframes */
