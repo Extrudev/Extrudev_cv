@@ -36,6 +36,8 @@ const { lang = 'es' } = Astro.props;
 </header>
 
 <script>
+  let isDocListenerAdded = false;
+
   function initHeader() {
     const btn = document.getElementById("mobile-menu-btn");
     const nav = document.getElementById("nav-links");
@@ -45,8 +47,33 @@ const { lang = 'es' } = Astro.props;
       const newBtn = btn.cloneNode(true);
       if(btn.parentNode) btn.parentNode.replaceChild(newBtn, btn);
       
-      newBtn.addEventListener("click", () => {
+      newBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // Evita que se dispare el click del document
         nav.classList.toggle("open");
+      });
+
+      // Cierra si haces click fuera de la caja
+      if (!isDocListenerAdded) {
+          document.addEventListener("click", (e) => {
+              const currentNav = document.getElementById("nav-links");
+              const currentBtn = document.getElementById("mobile-menu-btn");
+              
+              if (currentNav && currentNav.classList.contains("open")) {
+                  // Casteamos e.target a Node para evitar warnings de TypeScript
+                  const targetNode = e.target as Node;
+                  if (!currentNav.contains(targetNode) && currentBtn && !currentBtn.contains(targetNode)) {
+                      currentNav.classList.remove("open");
+                  }
+              }
+          });
+          isDocListenerAdded = true;
+      }
+
+      // Cerrar automáticamente al elegir una opción del menú
+      nav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+              nav.classList.remove("open");
+          });
       });
     }
   }
