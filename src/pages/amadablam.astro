@@ -391,13 +391,19 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
   section {
     min-height: 100dvh;
     height: auto; /* Dejar crecer según contenido nativo */
-    padding: 6rem 0; /* Padding protector para tablet/movil top/bottom */
+    padding: 3.5rem 0; /* Mobile First: Padding protector para móvil */
     box-sizing: border-box;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+
+  @media (min-width: 768px) {
+    section {
+      padding: 6rem 0; /* Padding Tablet */
+    }
   }
 
   @media (min-width: 1024px) {
@@ -411,21 +417,21 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
   .content-container {
     max-width: 1152px;
     width: 100%;
-    padding: 0 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1.5rem;
     box-sizing: border-box;
   }
 
-  @media (max-width: 1023px) {
+  @media (min-width: 768px) {
     .content-container {
       padding-left: 2rem;
       padding-right: 3rem;
     }
   }
 
-  @media (max-width: 767px) {
+  @media (min-width: 1024px) {
     .content-container {
-      padding-left: 1.5rem;
-      padding-right: 2rem;
+      padding: 0 1.5rem;
     }
   }
 </style>
@@ -461,9 +467,16 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     width: 100%;
     height: 100%;
     background-image: url("/amadablam/bg-climb-wall.jpg");
-    background-size: cover;
+    /* Mobile First: Estirar imagen más allá de 100vh para posibilitar el scroll de parallax dinámico (fondo de escalada) y zoom severo */
+    background-size: auto 250vh;
     background-position: center bottom;
     z-index: -2;
+  }
+
+  @media (min-width: 768px) {
+    .bg-climb-wall {
+      background-size: cover;
+    }
   }
 
   /* ── Navegación lateral derecha ──────────────────────── */

@@ -49,11 +49,11 @@ const { formacion } = data[lang];
     .container {
         max-width: 900px;
         margin: 0 auto;
-        padding: 0 2rem;
+        padding: 0 1rem;
     }
 
     .section-title {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
         margin-bottom: 5rem;
         text-align: left;
         color: var(--text);
@@ -63,6 +63,18 @@ const { formacion } = data[lang];
         position: relative;
         border-left: 1px solid var(--primary);
         padding-left: 0;
-        margin-left: 2rem;
+        margin-left: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .container {
+            padding: 0 2rem;
+        }
+        .timeline {
+            margin-left: 2rem;
+        }
+        .section-title {
+            font-size: 2.2rem;
+        }
     }
 </style>

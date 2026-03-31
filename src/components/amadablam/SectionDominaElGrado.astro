@@ -33,7 +33,7 @@
 
 <style>
   .section-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 2rem;
     text-align: center;
@@ -60,10 +60,16 @@
 
   .service-card {
     background-color: rgba(24, 24, 27, 0.8);
-    padding: 2rem;
+    padding: 1.5rem;
     border-left: 4px solid var(--clr-main);
     transition: all 0.3s;
     cursor: default;
+  }
+
+  @media (min-width: 768px) {
+    .service-card {
+      padding: 2rem;
+    }
   }
 
   .service-card:hover {
