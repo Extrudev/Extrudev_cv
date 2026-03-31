@@ -176,27 +176,26 @@ const slides = [
     let isDragging = false;
 
     function handleDragStart(e: MouseEvent | TouchEvent) {
+      if (!track) return;
       isDragging = true;
       startX = "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
-      if (track) {
-        track.style.cursor = "grabbing";
-        track.style.transition = "none";
-      }
+      track.style.cursor = "grabbing";
+      track.style.transition = "none";
     }
 
     function handleDragMove(e: MouseEvent | TouchEvent) {
-      if (!isDragging) return;
+      if (!isDragging || !track) return;
       const currentX = "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
       const diff = startX - currentX;
       
       const diffPercent = (diff / track.clientWidth) * 100;
-      if (track) track.style.transform = `translateX(-${(current * 100) + diffPercent}%)`;
+      track.style.transform = `translateX(-${(current * 100) + diffPercent}%)`;
     }
 
     function handleDragEnd(e: MouseEvent | TouchEvent) {
-      if (!isDragging) return;
+      if (!isDragging || !track) return;
       isDragging = false;
-      if (track) track.style.cursor = "grab";
+      track.style.cursor = "grab";
 
       const endX =
         "changedTouches" in e

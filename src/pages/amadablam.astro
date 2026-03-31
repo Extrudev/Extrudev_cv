@@ -22,8 +22,9 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
   <body>
     {/* Loader Overlay */}
     <div id="amadablam-loader" class="ama-loader">
-      <div class="ama-progress">
-        <div id="ama-progress-bar" class="ama-progress-bar"></div>
+      <div class="loader-text-container">
+        <div class="loader-text outline">Ama Dablam</div>
+        <div class="loader-text solid" id="ama-progress-bar">Ama Dablam</div>
       </div>
     </div>
 
@@ -45,43 +46,45 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
 
     <main id="climb-container" class="locked">
       {/* Fondo dinámico con parallax */}
-      <div id="dynamic-bg" class="bg-climb-wall"></div>
+      <div id="dynamic-bg" class="bg-climb-wall zoom-out-start"></div>
 
-      {/* Navegación lateral (oculta en mobile) */}
-      <nav class="fixed-nav">
-        <ul class="nav-links">
-          <li>
-            <a href="#base" class="nav-item active" data-target="base">
-              <span class="nav-text">Base</span>
-            </a>
-          </li>
-          <li>
-            <a href="#high" class="nav-item" data-target="high">
-              <span class="nav-text">Instalaciones</span>
-            </a>
-          </li>
-          <li>
-            <a href="#low" class="nav-item" data-target="low">
-              <span class="nav-text">Domina el Grado</span>
-            </a>
-          </li>
-          <li>
-            <a href="#summit" class="nav-item" data-target="summit">
-              <span class="nav-text">¡La Cima!</span>
-            </a>
-          </li>
-        </ul>
-        {/* Barra de progreso */}
-        <div class="progress-track">
-          <div id="progress-bar" class="progress-bar"></div>
-        </div>
-      </nav>
+      <div id="climb-content" class="content-hidden">
+        {/* Navegación lateral (oculta en mobile) */}
+        <nav class="fixed-nav">
+          <ul class="nav-links">
+            <li>
+              <a href="#base" class="nav-item active" data-target="base">
+                <span class="nav-text">Base</span>
+              </a>
+            </li>
+            <li>
+              <a href="#high" class="nav-item" data-target="high">
+                <span class="nav-text">Instalaciones</span>
+              </a>
+            </li>
+            <li>
+              <a href="#low" class="nav-item" data-target="low">
+                <span class="nav-text">Domina el Grado</span>
+              </a>
+            </li>
+            <li>
+              <a href="#summit" class="nav-item" data-target="summit">
+                <span class="nav-text">¡La Cima!</span>
+              </a>
+            </li>
+          </ul>
+          {/* Barra de progreso */}
+          <div class="progress-track">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+        </nav>
 
-      {/* Secciones */}
-      <SectionLaCima />
-      <SectionDominaElGrado />
-      <SectionInstalaciones />
-      <SectionBase />
+        {/* Secciones */}
+        <SectionLaCima />
+        <SectionDominaElGrado />
+        <SectionInstalaciones />
+        <SectionBase />
+      </div>
     </main>
 
     <script>
@@ -198,7 +201,6 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
       // --- LOGICA DEL PRELOADER ---
       const loaderOverlay = document.getElementById("amadablam-loader");
       const progressBarEl = document.getElementById("ama-progress-bar");
-      const nativeLogo = document.querySelector("#base .icon-container");
 
       let loadProgress = 0;
       let isWindowLoaded = false;
@@ -206,7 +208,7 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
 
       function simulateProgress() {
         if (!progressBarEl) return;
-        const incr = Math.random() * 8 + 4; // ~16 steps total
+        const incr = Math.random() * 15 + 8; // Faster step ~10 total steps
         loadProgress += incr;
 
         // Pausar al 90% esperando recursos de la carga real
@@ -218,7 +220,7 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
         progressBarEl.style.width = `${loadProgress}%`;
 
         if (loadProgress < 100) {
-          const pause = Math.random() * 300 + 150; // media de ~225ms (aprox 4s total)
+          const pause = Math.random() * 150 + 50; // media de ~100ms
           setTimeout(simulateProgress, pause);
         } else {
           finishLoader();
@@ -230,12 +232,35 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
         isLoaderFinished = true;
         setTimeout(() => {
           if (loaderOverlay) loaderOverlay.style.opacity = "0";
-          container.classList.remove("locked"); // Liberamos el scroll
+
+          // Esperamos a que el preloader se haya desvanecido casi del todo para hacer el zoom
+          setTimeout(() => {
+            if (bg) bg.classList.remove("zoom-out-start");
+          }, 600);
 
           setTimeout(() => {
             if (loaderOverlay) loaderOverlay.style.display = "none";
-            if (nativeLogo) nativeLogo.classList.add("logo-normal");
           }, 800);
+
+          // Mostramos el contenido de la web un poco ANTES de que termine el zoom
+          // Soluciona la sensación de "retraso" al fluir con el último tramo de la animación
+          setTimeout(() => {
+            const content = document.getElementById("climb-content");
+            if (content) {
+              content.classList.remove("content-hidden");
+            }
+          }, 1600);
+
+          // Liberamos el scroll y arreglamos el Parallax
+          setTimeout(() => {
+            container.classList.remove("locked");
+
+            // FUNDAMENTAL: Eliminar la transición de 2.5s del background.
+            // Si la dejamos, el Parallax intentará tardar 2.5s en cada pixel de scroll.
+            if (bg) {
+              bg.style.transition = "none";
+            }
+          }, 3100);
         }, 400); // pequeña pausa en 100%
       }
 
@@ -247,7 +272,6 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
           container.scrollTop = container.scrollHeight;
           syncProgressTrackHeight();
 
-          if (nativeLogo) nativeLogo.classList.add("logo-loaded"); // Hacer visible el logo SOBRE el loader
           isWindowLoaded = true;
 
           // Si el loader se pausó, terminarlo
@@ -352,7 +376,7 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
   .section-title {
     font-family: "MadeInfinity", "Host Grotesk", sans-serif !important;
     font-weight: 900;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.01em;
   }
 
   /* ── Animaciones ─────────────────────────────────────── */
@@ -459,6 +483,16 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     height: 100%;
   }
 
+  /* ── Ocultar / Mostrar contenido tras animación ──────── */
+  #climb-content {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .content-hidden {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+
   /* ── Fondo dinámico ──────────────────────────────────── */
   .bg-climb-wall {
     position: fixed;
@@ -466,16 +500,32 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: var(--clr-dark);
     background-image: url("/amadablam/bg-climb-wall.jpg");
-    /* Mobile First: Estirar imagen más allá de 100vh para posibilitar el scroll de parallax dinámico (fondo de escalada) y zoom severo */
-    background-size: auto 250vh;
-    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: auto 250vh; /* Final Móvil: Zoom extremo */
+    background-position: center bottom; /* Final General: Anclados en la base */
     z-index: -2;
+    /* Al poner ambas agrupadas, nunca se sobreescriben */
+    transition:
+      background-size 2.5s cubic-bezier(0.65, 0, 0.35, 1),
+      background-position 2.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .bg-climb-wall.zoom-out-start {
+    /* Móvil: Para que el navegador anime, tiene que ir de valor a valor. 120vh evita bordes blancos */
+    background-size: auto 120vh;
   }
 
   @media (min-width: 768px) {
     .bg-climb-wall {
-      background-size: cover;
+      background-size: 100vw auto;
+      background-position: center bottom; /* Final Desktop: Base de pared */
+      transition: background-position 2.5s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    .bg-climb-wall.zoom-out-start {
+      background-size: 100vw auto;
+      background-position: center top; /* Inicio Desktop: Cima (hace pan hacia base) */
     }
   }
 
@@ -609,37 +659,38 @@ import SectionLaCima from "../components/amadablam/SectionLaCima.astro";
     background-color: var(--clr-dark);
     z-index: 9999;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     transition: opacity 0.8s ease;
   }
-  .ama-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100dvw;
-    height: 10dvh;
-    overflow: hidden;
-  }
-  .ama-progress-bar {
-    width: 0%;
-    height: 100%;
-    background: var(--clr-main);
-    transition: width 0.3s ease-out;
-  }
-
-  /* El logo nativo flota al frente durante el load */
-  :global(#base .icon-container) {
+  .loader-text-container {
     position: relative;
-    z-index: 10000;
-    opacity: 0;
-    transition: opacity 0.4s ease-out;
+    font-size: 3rem;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: -0.05em;
   }
-  :global(#base .icon-container.logo-loaded) {
-    opacity: 1;
+  @media (min-width: 768px) {
+    .loader-text-container {
+      font-size: 8rem;
+    }
   }
-  :global(#base .icon-container.logo-normal) {
-    z-index: 1; /* Retorna a z-index normal al terminar */
+  .loader-text {
+    margin: 0;
+    white-space: nowrap;
+  }
+  .loader-text.outline {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
+  }
+  .loader-text.solid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--clr-main);
+    overflow: hidden;
+    width: 0%;
+    transition: width 0.3s ease-out;
   }
 </style>
