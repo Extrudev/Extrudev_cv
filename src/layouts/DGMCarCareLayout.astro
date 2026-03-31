@@ -8,7 +8,11 @@ interface Props {
   favicon?: string;
 }
 
-const { title, description, favicon = "/favicon.svg" } = Astro.props;
+const {
+  title,
+  description,
+  favicon = "/public/dgm-car-care/favicon-dgm.svg",
+} = Astro.props;
 ---
 
 <!doctype html>
