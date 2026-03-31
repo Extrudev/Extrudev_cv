@@ -1,10 +1,10 @@
 ---
-import "../../styles/global.css";
-import Header from "../../components/Header.astro";
-import Hero from "../../components/Hero.astro";
-import ExperienceRoute from "../../components/ExperienceRoute.astro";
-import FormacionRoute from "../../components/FormacionRoute.astro";
-import Footer from "../../components/Footer.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/cv/Header.astro";
+import Hero from "../../components/cv/Hero.astro";
+import ExperienceRoute from "../../components/cv/ExperienceRoute.astro";
+import FormacionRoute from "../../components/cv/FormacionRoute.astro";
+import Footer from "../../components/cv/Footer.astro";
 
 const lang = 'en';
 const data = (await import("../../data/data.json")).default as any;
@@ -12,31 +12,15 @@ const { personalInfo } = data[lang];
 const roleDynamic = personalInfo.role.replace('{{YEARS}}', new Date().getFullYear() - 2023);
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta
-			name="description"
-			content={`Portfolio of ${personalInfo.name} - ${roleDynamic}`}
-		/>
-		<title>{personalInfo.name} | {roleDynamic}</title>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Onest:wght@100..900&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-	<body>
-		<Header lang={lang} />
-		<main>
-			<Hero lang={lang} />
-			<ExperienceRoute lang={lang} />
-			<FormacionRoute lang={lang} />
-		</main>
-		<Footer lang={lang} />
-	</body>
-</html>
+<MainLayout 
+	title={`${personalInfo.name} | ${roleDynamic}`}
+	description={`Portfolio of ${personalInfo.name} - ${roleDynamic}`}
+>
+	<Header lang={lang} />
+	<main>
+		<Hero lang={lang} />
+		<ExperienceRoute lang={lang} />
+		<FormacionRoute lang={lang} />
+	</main>
+	<Footer lang={lang} />
+</MainLayout>

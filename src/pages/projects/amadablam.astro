@@ -1,0 +1,287 @@
+---
+import AmaDablamLayout from "../../layouts/AmaDablamLayout.astro";
+import SectionBase from "../../components/projects/amadablam/SectionBase.astro";
+import SectionDominaElGrado from "../../components/projects/amadablam/SectionDominaElGrado.astro";
+import SectionInstalaciones from "../../components/projects/amadablam/SectionInstalaciones.astro";
+import SectionLaCima from "../../components/projects/amadablam/SectionLaCima.astro";
+import "../../styles/projects/amadablam/amadablam.css";
+---
+
+<AmaDablamLayout 
+  title="Club Alpino Ama Dablam | The Ultimate Ascent"
+  description="Landing page premium con animacion customizada para club de alpinismo ama dablam."
+  favicon="/amadablam/favicon.svg"
+>
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet"
+  />
+
+  {/* Loader Overlay */}
+  <div id="amadablam-loader" class="ama-loader">
+    <div class="loader-text-container">
+      <div class="loader-text outline">Ama Dablam</div>
+      <div class="loader-text solid" id="ama-progress-bar">Ama Dablam</div>
+    </div>
+  </div>
+
+
+
+  <main id="climb-container" class="locked">
+    {/* Fondo dinámico con parallax */}
+    <div id="dynamic-bg" class="bg-climb-wall zoom-out-start"></div>
+
+    <div id="climb-content" class="content-hidden">
+      {/* Navegación lateral (oculta en mobile) */}
+      <nav class="fixed-nav">
+        <ul class="nav-links">
+          <li>
+            <a href="#base" class="nav-item active" data-target="base">
+              <span class="nav-text">Base</span>
+            </a>
+          </li>
+          <li>
+            <a href="#high" class="nav-item" data-target="high">
+              <span class="nav-text">Instalaciones</span>
+            </a>
+          </li>
+          <li>
+            <a href="#low" class="nav-item" data-target="low">
+              <span class="nav-text">Domina el Grado</span>
+            </a>
+          </li>
+          <li>
+            <a href="#summit" class="nav-item" data-target="summit">
+              <span class="nav-text">¡La Cima!</span>
+            </a>
+          </li>
+        </ul>
+        {/* Barra de progreso */}
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+      </nav>
+
+      {/* Secciones */}
+      <SectionLaCima />
+      <SectionDominaElGrado />
+      <SectionInstalaciones />
+      <SectionBase />
+    </div>
+  </main>
+
+  <script>
+    import Lenis from "lenis";
+
+    const isDesktop = () =>
+      window.innerWidth >= 1024 &&
+      !window.matchMedia("(pointer: coarse)").matches;
+
+    const container = document.getElementById(
+      "climb-container",
+    ) as HTMLElement;
+    const bg = document.getElementById("dynamic-bg") as HTMLElement | null;
+    const progressBar = document.getElementById(
+      "progress-bar",
+    ) as HTMLElement | null;
+    const progressTrack = document.querySelector(
+      ".progress-track",
+    ) as HTMLElement | null;
+    const sections = document.querySelectorAll("section");
+
+    if (!container) throw new Error("climb-container no encontrado");
+
+    function syncProgressTrackHeight() {
+      const navItems = Array.from(
+        document.querySelectorAll(".fixed-nav .nav-item"),
+      ) as HTMLElement[];
+      if (!progressTrack || navItems.length < 2) return;
+      const first = navItems[0].getBoundingClientRect();
+      const last = navItems[navItems.length - 1].getBoundingClientRect();
+      const h = Math.abs(
+        last.top + last.height / 2 - (first.top + first.height / 2),
+      );
+      progressTrack.style.height = `${h}px`;
+    }
+
+    function onScroll(scrollTop: number) {
+      const totalHeight = container.scrollHeight - container.clientHeight;
+      const scrollPercent = scrollTop / totalHeight;
+
+      if (progressBar) {
+        progressBar.style.height = `${(1 - scrollPercent) * 100}%`;
+      }
+      if (bg) {
+        bg.style.backgroundPosition = `center ${scrollPercent * 100}%`;
+      }
+      sections.forEach((sec) => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+          updateNavActive(sec.getAttribute("id") || "base");
+        }
+      });
+    }
+
+    function updateNavActive(id: string) {
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.classList.remove("active");
+        if (item.getAttribute("data-target") === id)
+          item.classList.add("active");
+      });
+    }
+
+    document.querySelectorAll(".nav-item").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute("data-target");
+        if (!targetId) return;
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        if (lenis) {
+          lenis.scrollTo(targetEl, { offset: 0 });
+        } else {
+          targetEl.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    let lenis: InstanceType<typeof Lenis> | null = null;
+    let rafId = 0;
+
+    function initLenis() {
+      if (lenis) return;
+      lenis = new Lenis({
+        wrapper: container,
+        duration: 1.8,
+        wheelMultiplier: 0.3,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
+      lenis.on("scroll", ({ scroll }: { scroll: number }) =>
+        onScroll(scroll),
+      );
+
+      function raf(time: number) {
+        lenis!.raf(time);
+        rafId = requestAnimationFrame(raf);
+      }
+      rafId = requestAnimationFrame(raf);
+    }
+
+    function destroyLenis() {
+      if (!lenis) return;
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+      lenis = null;
+      container.addEventListener("scroll", nativeScroll);
+    }
+
+    function nativeScroll() {
+      onScroll(container.scrollTop);
+    }
+
+    // --- LOGICA DEL PRELOADER ---
+    const loaderOverlay = document.getElementById("amadablam-loader");
+    const progressBarEl = document.getElementById("ama-progress-bar");
+
+    let loadProgress = 0;
+    let isWindowLoaded = false;
+    let isLoaderFinished = false;
+
+    function simulateProgress() {
+      if (!progressBarEl) return;
+      const incr = Math.random() * 15 + 8; // Faster step ~10 total steps
+      loadProgress += incr;
+
+      // Pausar al 90% esperando recursos de la carga real
+      if (loadProgress >= 90 && !isWindowLoaded) {
+        loadProgress = 90;
+      }
+      if (loadProgress > 100) loadProgress = 100;
+
+      progressBarEl.style.width = `${loadProgress}%`;
+
+      if (loadProgress < 100) {
+        const pause = Math.random() * 150 + 50; // media de ~100ms
+        setTimeout(simulateProgress, pause);
+      } else {
+        finishLoader();
+      }
+    }
+
+    function finishLoader() {
+      if (isLoaderFinished) return;
+      isLoaderFinished = true;
+      setTimeout(() => {
+        if (loaderOverlay) loaderOverlay.style.opacity = "0";
+
+        // Esperamos a que el preloader se haya desvanecido casi del todo para hacer el zoom
+        setTimeout(() => {
+          if (bg) bg.classList.remove("zoom-out-start");
+        }, 600);
+
+        setTimeout(() => {
+          if (loaderOverlay) loaderOverlay.style.display = "none";
+        }, 800);
+
+        // Mostramos el contenido de la web un poco ANTES de que termine el zoom
+        // Soluciona la sensación de "retraso" al fluir con el último tramo de la animación
+        setTimeout(() => {
+          const content = document.getElementById("climb-content");
+          if (content) {
+            content.classList.remove("content-hidden");
+          }
+        }, 1600);
+
+        // Liberamos el scroll y arreglamos el Parallax
+        setTimeout(() => {
+          container.classList.remove("locked");
+
+          // FUNDAMENTAL: Eliminar la transición de 2.5s del background.
+          // Si la dejamos, el Parallax intentará tardar 2.5s en cada pixel de scroll.
+          if (bg) {
+            bg.style.transition = "none";
+          }
+        }, 3100);
+      }, 400); // pequeña pausa en 100%
+    }
+
+    // Arrancamos la simulación del loader
+    setTimeout(simulateProgress, 50);
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        container.scrollTop = container.scrollHeight;
+        syncProgressTrackHeight();
+
+        isWindowLoaded = true;
+
+        // Si el loader se pausó, terminarlo
+        if (loadProgress >= 90 && loadProgress < 100) {
+          loadProgress = 100;
+          if (progressBarEl) progressBarEl.style.width = "100%";
+          finishLoader();
+        }
+
+        if (isDesktop()) {
+          initLenis();
+        } else {
+          container.addEventListener("scroll", nativeScroll);
+        }
+      }, 150);
+    });
+
+    window.addEventListener("resize", () => {
+      syncProgressTrackHeight();
+      if (isDesktop()) {
+        container.removeEventListener("scroll", nativeScroll);
+        initLenis();
+      } else {
+        destroyLenis();
+        container.addEventListener("scroll", nativeScroll);
+      }
+    });
+  </script>
+</ProjectLayout>

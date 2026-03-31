@@ -1,0 +1,359 @@
+/* ── Fuentes ─────────────────────────────────────────── */
+@font-face {
+  font-family: "MadeInfinity";
+  src: url("/amadablam/font/MADEINFINITYPersonalUse-Black.otf");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "MadeInfinity-Outline";
+  src: url("/amadablam/font/MADEINFINITYOutlinePersonalUse-Black.otf");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "MadeInfinity-Beside";
+  src: url("/amadablam/font/MADEINFINITYBesidePersonalUse-Black.otf");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Reset anchors ───────────────────────────────────── */
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+:root {
+  --clr-dark: #003049;
+  --clr-contrast: #d62828;
+  --clr-accent: #f77f00;
+  --clr-main: #fcbf49;
+  --clr-text: #ffffff;
+  --clr-text-muted: rgba(255, 255, 255, 0.5);
+  --clr-surface: rgba(0, 48, 73, 0.78);
+  --clr-overlay: rgba(0, 0, 0, 0.45);
+  --clr-border: rgba(255, 255, 255, 0.12);
+  --font-display: "MadeInfinity", sans-serif;
+  --font-outline: "MadeInfinity-Outline", sans-serif;
+  --font-beside: "MadeInfinity-Beside", sans-serif;
+  --font-body: "Host Grotesk", sans-serif;
+  --nav-right: 2rem;
+}
+
+/* ── Reset ───────────────────────────────────────────── */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  color: var(--clr-text);
+  background-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.top-badge,
+.main-title,
+.section-title {
+  font-family: "MadeInfinity", "Host Grotesk", sans-serif !important;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+/* ── Animaciones ─────────────────────────────────────── */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}
+
+#climb-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#climb-container.locked {
+  overflow: hidden !important;
+}
+
+#climb-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Secciones ───────────────────────────────────────── */
+section {
+  min-height: 100dvh;
+  height: auto;
+  padding: 3.5rem 0;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: 6rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    height: 100vh;
+    padding: 0;
+  }
+}
+
+/* ── Shared layout ───────────────────────────────────── */
+.content-container {
+  max-width: 1152px;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .content-container {
+    padding-left: 2rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-container {
+    padding: 0 1.5rem;
+  }
+}
+
+/* ── Ocultar / Mostrar contenido tras animación ──────── */
+#climb-content {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.content-hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* ── Fondo dinámico ──────────────────────────────────── */
+.bg-climb-wall {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-dark);
+  background-image: url("/amadablam/bg-climb-wall.jpg");
+  background-repeat: no-repeat;
+  background-size: auto 250vh;
+  background-position: center bottom;
+  z-index: -2;
+  transition:
+    background-size 2.5s cubic-bezier(0.65, 0, 0.35, 1),
+    background-position 2.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.bg-climb-wall.zoom-out-start {
+  background-size: auto 120vh;
+}
+
+@media (min-width: 768px) {
+  .bg-climb-wall {
+    background-size: 100vw auto;
+    background-position: center bottom;
+    transition: background-position 2.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .bg-climb-wall.zoom-out-start {
+    background-size: 100vw auto;
+    background-position: center top;
+  }
+}
+
+/* ── Navegación lateral derecha ──────────────────────── */
+.fixed-nav {
+  position: fixed;
+  right: var(--nav-right);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 1.25rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8rem;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--clr-text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.nav-dot {
+  display: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.nav-item:hover {
+  color: var(--clr-text);
+}
+
+.nav-item.active {
+  color: var(--clr-main);
+  font-weight: 700;
+  scale: 1.25;
+  transform-origin: right center;
+}
+
+/* ── Riel de progreso ────────────────────────────────── */
+.progress-track {
+  position: relative;
+  width: 5px;
+  height: 450px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: var(--clr-main);
+  border-radius: 2px;
+  transition: height 0.15s ease;
+}
+
+/* ── Versión Tablets y Móviles ───────────────────────────── */
+@media (max-width: 1023px) {
+  .fixed-nav {
+    right: 0;
+    top: 0;
+    transform: translateY(0);
+    height: 100dvh;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav-links {
+    display: none !important;
+  }
+
+  .nav-item {
+    padding: 1rem;
+    scale: 1 !important;
+  }
+
+  .nav-text {
+    display: none;
+  }
+
+  .nav-dot {
+    display: none !important;
+  }
+
+  .progress-track {
+    height: 100dvh !important;
+    width: 10px;
+    border-radius: 0;
+    margin-right: 0px;
+    box-shadow: none !important;
+  }
+}
+
+/* ── Loader Overlay y Modificador del Logo ───────────────────────────── */
+.ama-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--clr-dark);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease;
+}
+.loader-text-container {
+  position: relative;
+  font-size: 3rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+@media (min-width: 768px) {
+  .loader-text-container {
+    font-size: 8rem;
+  }
+}
+.loader-text {
+  margin: 0;
+  white-space: nowrap;
+}
+.loader-text.outline {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
+}
+.loader-text.solid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--clr-main);
+  overflow: hidden;
+  width: 0%;
+  transition: width 0.3s ease-out;
+}

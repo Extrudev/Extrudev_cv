@@ -1,6 +1,6 @@
 ---
 const { lang = "es" } = Astro.props;
-const data = (await import("../data/data.json")).default as any;
+const data = (await import("../../data/data.json")).default as any;
 const { personalInfo } = data[lang];
 const roleDynamic = personalInfo.role.replace(
     "{{YEARS}}",

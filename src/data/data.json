@@ -12,11 +12,18 @@
     },
     "experiencia": [
       {
+        "id": 10,
+        "date": "Abril 2026",
+        "title": "DGM Car Care - Detailing Profesional",
+        "subtitle": "Landing page premium para servicios de detallado automotriz, con enfoque en acabados de alta gama.",
+        "link": "/projects/dgm-car-care"
+      },
+      {
         "id": 9,
         "date": "Marzo 2026",
         "title": "Landing page para Club de alpinismo",
         "subtitle": "Landing page premium con animacion customizada para club de alpinismo ama dablam.",
-        "link": "/amadablam"
+        "link": "/projects/amadablam"
       },
       {
         "id": 8,
@@ -91,11 +98,18 @@
     },
     "experiencia": [
       {
+        "id": 10,
+        "date": "April 2026",
+        "title": "DGM Car Care - Professional Detailing",
+        "subtitle": "Premium landing page for automotive detailing services, focusing on high-end finishes.",
+        "link": "/projects/dgm-car-care"
+      },
+      {
         "id": 9,
         "date": "March 2026",
         "title": "Landing page for Hiking Club",
         "subtitle": "Premium landing page with customized animation for the 'Ama Dablam' hiking club.",
-        "link": "/amadablam"
+        "link": "/projects/amadablam"
       },
       {
         "id": 8,

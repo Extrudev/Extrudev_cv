@@ -1,11 +1,11 @@
 ---
 import Card from "./Card.astro";
 const { lang = 'es' } = Astro.props;
-const data = (await import("../data/data.json")).default as any;
-const { formacion } = data[lang];
+const data = (await import("../../data/data.json")).default as any;
+const { experiencia } = data[lang];
 ---
 
-<section id="formacion" class="experience-section">
+<section id="experience" class="experience-section">
     <div class="container">
         <h2 class="section-title">
             <span>
@@ -20,15 +20,20 @@ const { formacion } = data[lang];
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     style="margin-right: 10px; vertical-align: middle;"
-                    ><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg
+                    ><rect width="20" height="14" x="2" y="3" rx="2" ry="2"
+                    ></rect><line x1="8" y1="21" x2="16" y2="21"></line><line
+                        x1="12"
+                        y1="17"
+                        x2="12"
+                        y2="21"></line></svg
                 >
-                {lang === 'es' ? 'Formación:' : 'Education:'}
+                {lang === 'es' ? 'Experiencia:' : 'Experience:'}
             </span>
         </h2>
 
         <div class="timeline">
             {
-                formacion.map((exp: any) => (
+                experiencia.map((exp: any) => (
                     <Card
                         date={exp.date}
                         title={exp.title}

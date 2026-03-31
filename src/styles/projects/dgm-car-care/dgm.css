@@ -1,0 +1,31 @@
+:root {
+  --dgm-black: #0a0a0a;
+  --dgm-silver: #c0c0c0;
+  --dgm-chrome: #e5e5e5;
+  --dgm-blue: #0077be;
+  --dgm-accent: #00d2ff;
+  --font-heading: 'Kenia', serif;
+  --font-body: 'Playfair Display', sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--dgm-black);
+  color: white;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}
+
+p {
+  font-family: var(--font-body);
+}
