@@ -7,13 +7,9 @@
     <h1 class="top-badge">¡Has llegado a la cima!</h1>
   </div>
   <div class="content-container summit-grid">
-    <div class="summit-text">
-      <h2 class="section-title">La Cima</h2>
-      <p class="summit-quote">
-        «Las mejores vistas llegan tras la escalada más dura.»
-      </p>
-    </div>
-
+    <p class="summit-quote">
+      «Las mejores vistas llegan tras la escalada más dura.»
+    </p>
     <div class="summit-right">
       <a
         href="https://maps.app.goo.gl/DotZusihTLH1V2K69"
@@ -36,7 +32,7 @@
           height="48"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="var(--clr-accent)"
+          stroke="var(--clr-main)"
           stroke-width="3"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -129,20 +125,6 @@
     }
   }
 
-  .section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  @media (min-width: 768px) {
-    .section-title {
-      font-size: 3rem;
-      text-align: left;
-    }
-  }
-
   .summit-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -174,7 +156,6 @@
   .map-link {
     display: block;
     overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.1);
     position: relative;
   }
 
@@ -184,6 +165,7 @@
     background-color: rgba(0, 0, 0, 0.25);
     pointer-events: none;
     z-index: 1;
+    border-radius: 1rem;
   }
 
   .map-img {
@@ -191,6 +173,7 @@
     width: 100%;
     height: 360px;
     object-fit: cover;
+    border-radius: 1rem;
   }
 
   .location-info {
@@ -204,7 +187,6 @@
   }
 
   @media (max-width: 767px) {
-    .summit-text,
     .map-link,
     .map-pointer {
       display: none !important;
@@ -224,16 +206,6 @@
     flex-shrink: 0;
     margin-top: 1px;
     color: var(--clr-main);
-  }
-
-  .summit-text {
-    text-align: center;
-  }
-
-  @media (min-width: 768px) {
-    .summit-text {
-      text-align: left;
-    }
   }
 
   .top-badge {
@@ -259,15 +231,15 @@
   }
 
   .summit-quote {
-    font-size: 1.25rem;
-    font-style: italic;
-    color: #d1d5db;
+    font-size: 3rem;
+    color: var(--clr-main);
+    opacity: 0.8;
     margin-bottom: 2rem;
   }
-
-  @media (min-width: 768px) {
+  @media (max-width: 767px) {
     .summit-quote {
-      font-size: 1.5rem;
+      font-size: 2.5rem;
+      text-align: center;
     }
   }
 
@@ -299,7 +271,7 @@
 
   .summit-contact h3 {
     color: #9ca3af;
-    font-size: 0.875rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
   }
 
@@ -312,10 +284,10 @@
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.5rem;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.1em;
     transition: all 0.3s;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 1rem;
   }
 
   .btn-outline:hover {
@@ -376,12 +348,11 @@
 </style>
 
 <style is:global>
-  /* Extraemos la flecha a global para asegurar que sus keyframes no se pierdan */
   .map-pointer {
     position: absolute !important;
-    top: 55% !important; /* Apuntando hacia abajo-izquierda sobre la caseta */
-    left: 40% !important;
-    rotate: 45deg;
+    top: 62% !important;
+    left: 34% !important;
+    rotate: 30deg;
     pointer-events: none !important;
     animation: pointerBounce 1.5s infinite cubic-bezier(0.28, 0.84, 0.42, 1) !important;
     z-index: 10;
@@ -393,7 +364,7 @@
       transform: translate(-50%, -50%) translateY(0);
     }
     50% {
-      transform: translate(-50%, -50%) translateY(12px);
+      transform: translate(-50%, -50%) translateY(10px);
     }
   }
 </style>
