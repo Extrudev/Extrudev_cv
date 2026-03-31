@@ -239,20 +239,35 @@ import "../../styles/projects/amadablam/amadablam.css";
         setTimeout(() => {
           container.classList.remove("locked");
 
+          // Forzamos a Lenis a inicializarse SOLO cuando el contenedor se desbloquea
+          if (isDesktop()) {
+            initLenis();
+            if (lenis) {
+              // Aseguramos que Lenis considere el punto de partida (base) como actual
+              lenis.scrollTo("bottom", { immediate: true });
+            }
+          } else {
+            container.addEventListener("scroll", nativeScroll);
+          }
+
           // FUNDAMENTAL: Eliminar la transición de 2.5s del background.
-          // Si la dejamos, el Parallax intentará tardar 2.5s en cada pixel de scroll.
+          // Ahora lo hacemos a los 3100ms para que la animación previa haya terminado al 100%
           if (bg) {
             bg.style.transition = "none";
           }
-        }, 3100);
+        }, 3100); // Restaurado a 3100 para sincronizar con la transición de 2.5s del fondo
       }, 400); // pequeña pausa en 100%
     }
 
     // Arrancamos la simulación del loader
     setTimeout(simulateProgress, 50);
 
+    // Posicionamiento inicial forzado antes de que ocurra nada
+    container.scrollTop = container.scrollHeight;
+
     window.addEventListener("load", () => {
       setTimeout(() => {
+        // Doble verificación de posicionamiento nativo silencioso mientras está bloqueado
         container.scrollTop = container.scrollHeight;
         syncProgressTrackHeight();
 
@@ -264,24 +279,20 @@ import "../../styles/projects/amadablam/amadablam.css";
           if (progressBarEl) progressBarEl.style.width = "100%";
           finishLoader();
         }
-
-        if (isDesktop()) {
-          initLenis();
-        } else {
-          container.addEventListener("scroll", nativeScroll);
-        }
       }, 150);
     });
 
     window.addEventListener("resize", () => {
       syncProgressTrackHeight();
       if (isDesktop()) {
-        container.removeEventListener("scroll", nativeScroll);
-        initLenis();
+        if (!lenis) {
+          container.removeEventListener("scroll", nativeScroll);
+          initLenis();
+        }
       } else {
         destroyLenis();
         container.addEventListener("scroll", nativeScroll);
       }
     });
   </script>
-</ProjectLayout>
+</AmaDablamLayout>
